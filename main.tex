@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage[hidelinks]{hyperref}
+\usepackage{multicol}
+\geometry{paperheight=21cm, paperwidth=29.7cm, left=1cm, right=1cm, top=1cm, bottom=1cm}
+\setlength{\columnsep}{2cm}
+\pagestyle{fancy}
+\fancyhead[L]{Team Reference Document}
+\fancyhead[R]{\thepage}
+\fancyfoot{}
+\lstset{
+    language     = C++,
+    basicstyle   = \tt\scriptsize,
+    frame        = shadowbox,
+    numbers      = left,
+    breaklines   = true,
+    keywordstyle = \bf,
+    commentstyle = \color{red}
+}
+\begin{document}
+\title{Team Reference Document}
+\author{Heltion}
+\maketitle
+\newpage
+\begin{multicols}{2}
+    \tableofcontents
+    \newpage
+    \section{Data Structure}
+    \subsection{Treap}
+    \lstinputlisting{datastructure/treap/main.cpp}
+\end{multicols}
+\end{document}
