@@ -1,5 +1,4 @@
-// https://www.luogu.com.cn/problem/P3835
-// https://www.luogu.com.cn/problem/P3835
+// https://www.luogu.com.cn/problem/P5055
 #include <bits/stdc++.h>
 using namespace std;
 using i64 = int64_t;
@@ -48,48 +47,60 @@ Node *merge(Node *l, Node *r) {
   if (l->priority < r->priority) { return r->update(merge(l, r->l), r->r); }
   return l->update(l->l, merge(l->r, r));
 }
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<Node *> tree(n + 1);
+  vector<Node *> t(n + 1), rt(n + 1);
+  i64 last_ans = 0;
   for (int i = 1; i <= n; i += 1) {
-    int v, opt, x;
-    cin >> v >> opt >> x;
+    int v, opt;
+    i64 a, b;
+    cin >> v >> opt >> a;
+    if (opt != 2) { cin >> b; }
+    a ^= last_ans;
+    b ^= last_ans;
     if (opt == 1) {
-      auto [l, r] = split_by_v(tree[v], x);
-      tree[i] = merge(merge(l, new Node(x)), r);
+      int ra = (t[v] ? t[v]->size : 0) - a;
+      {
+        auto [l, r] = split_by_size(t[v], a);
+        t[i] = merge(merge(l, new Node(b)), r);
+      }
+      {
+        auto [l, r] = split_by_size(rt[v], ra);
+        rt[i] = merge(merge(l, new Node(b)), r);
+      }
     }
     if (opt == 2) {
-      auto [l, r] = split_by_v(tree[v], x);
-      auto [rl, rr] = split_by_v(r, x + 1);
-      if (rl) { rl = merge(rl->l, rl->r); }
-      tree[i] = merge(merge(l, rl), rr);
+      int ra = t[v]->size + 1 - a;
+      {
+        auto [l, r] = split_by_size(t[v], a);
+        auto [ll, _] = split_by_size(l, a - 1);
+        t[i] = merge(ll, r);
+      }
+      {
+        auto [l, r] = split_by_size(rt[v], ra);
+        auto [ll, _] = split_by_size(l, ra - 1);
+        rt[i] = merge(ll, r);
+      }
     }
     if (opt == 3) {
-      tree[i] = tree[v];
-      auto [l, r] = split_by_v(tree[v], x);
-      cout << (l ? l->size : 0) + 1 << "\n";
+      int n = t[v]->size;
+      auto [l, r] = split_by_size(t[v], b);
+      auto [ll, lr] = split_by_size(l, a - 1);
+      auto [rl, rr] = split_by_size(rt[v], n + 1 - a);
+      auto [rll, rlr] = split_by_size(rl, n - b);
+      t[i] = merge(merge(ll, rlr), r);
+      rt[i] = merge(merge(rll, lr), rr);
     }
     if (opt == 4) {
-      tree[i] = tree[v];
-      auto [l, r] = split_by_size(tree[v], x - 1);
-      while (r->l) { r = r->l; }
-      cout << r->v << "\n";
-    }
-    if (opt == 5) {
-      tree[i] = tree[v];
-      auto [l, r] = split_by_v(tree[v], x);
-      while (l and l->r) { l = l->r; }
-      cout << (l ? l->v : numeric_limits<int>::min() + 1) << "\n";
-    }
-    if (opt == 6) {
-      tree[i] = tree[v];
-      auto [l, r] = split_by_v(tree[v], x + 1);
-      while (r and r->l) { r = r->l; }
-      cout << (r ? r->v : numeric_limits<int>::max()) << "\n";
+      t[i] = t[v];
+      rt[i] = rt[v];
+      auto [l, r] = split_by_size(t[v], b);
+      auto [ll, lr] = split_by_size(l, a - 1);
+      last_ans = lr->sum;
+      cout << last_ans << "\n";
     }
   }
 }
