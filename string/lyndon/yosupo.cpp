@@ -1,4 +1,4 @@
-// https://judge.yosupo.jp/problem/runenumerate
+// https://judge.yosupo.jp/problem/lyndon_factorization
 #include <bits/stdc++.h>
 using namespace std;
 
