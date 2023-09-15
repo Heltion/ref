@@ -1,7 +1,6 @@
 struct DisjointSparseTable {
-  const vector<int> &a;
   vector<vector<int>> table;
-  DisjointSparseTable(const vector<int> &a) : a(a) {
+  DisjointSparseTable(const vector<int> &a) {
     int h = bit_width(a.size() - 1), n = a.size();
     table.resize(h, a);
     for (int i = 0; i < h; i += 1) {
@@ -16,7 +15,7 @@ struct DisjointSparseTable {
     }
   }
   int query(int l, int r) {
-    if (l + 1 == r) { return a[l]; }
+    if (l + 1 == r) { return table[0][l]; }
     int i = bit_width(unsigned(l ^ (r - 1))) - 1;
     return min(table[i][l], table[i][r - 1]);
   }
