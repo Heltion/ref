@@ -1,4 +1,4 @@
-// https://judge.yosupo.jp/problem/primitive_root
+// https://www.luogu.com.cn/problem/P6091
 #include <bits/stdc++.h>
 using namespace std;
 using i64 = int64_t;
@@ -91,8 +91,28 @@ int main() {
   int q;
   cin >> q;
   for (int qi = 0; qi < q; qi += 1) {
-    i64 n;
-    cin >> n;
-    cout << minimum_primitive_root(n) << "\n";
+    i64 n, d;
+    cin >> n >> d;
+    auto pd = pollard_rho(n);
+    map<i64, int> mp;
+    for (i64 p : pd) { mp[p] += 1; }
+    if (mp.size() >= 3 or
+        (mp.size() == 2 and
+         (mp.begin()->first != 2 or mp.begin()->second != 1)) or
+        (mp.size() == 1 and mp.begin()->first == 2 and
+         mp.begin()->second > 2)) {
+      cout << "0\n\n";
+      continue;
+    }
+    i64 r = minimum_primitive_root(n);
+    i64 pn = phi(n);
+    vector<i64> res;
+    for (i64 i = 1; i <= pn; i += 1) {
+      if (gcd(i, pn) == 1) { res.push_back(power(r, i, n)); }
+    }
+    ranges::sort(res);
+    cout << res.size() << "\n";
+    for (i64 i = d - 1; i < ssize(res); i += d) { cout << res[i] << " "; }
+    cout << "\n";
   }
 }

@@ -11,6 +11,7 @@ i64 minimum_primitive_root(i64 n) {
   ranges::sort(pd);
   pd.erase(ranges::unique(pd).begin(), pd.end());
   auto check = [&](i64 r) {
+    if (gcd(r, n) != 1) { return false; }
     for (i64 pi : pd) {
       if (power(r, pn / pi, n) == 1) { return false; }
     }
