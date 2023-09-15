@@ -20,15 +20,14 @@ bool miller_rabin(i64 n) {
   int r = countr_zero(u64(n - 1));
   i64 d = (n - 1) >> r;
   for (int pi : p) {
-    if (pi < n) {
-      i64 x = power(pi, d, n);
-      if (x == 1 or x == n - 1) { continue; };
-      for (int j = 1; j < r; j += 1) {
-        x = (i128)x * x % n;
-        if (x == n - 1) { break; }
-      }
-      if (x != n - 1) { return false; }
+    if (pi >= n) { break; }
+    i64 x = power(pi, d, n);
+    if (x == 1 or x == n - 1) { continue; };
+    for (int j = 1; j < r; j += 1) {
+      x = (i128)x * x % n;
+      if (x == n - 1) { break; }
     }
+    if (x != n - 1) { return false; }
   }
   return true;
 };
