@@ -31,14 +31,22 @@
     \newpage
 
     \section{Graph}
-    \subsection{Circuit}
+    \subsection{Euler's Circuit}
     \lstinputlisting{graph/circuit/main.cpp}
-
     \subsection{Strongly Connected Components}
     \lstinputlisting{graph/scc/main.cpp}
-
+    \subsection{Two-vertex-connected Components}
+    \lstinputlisting{graph/2vcc/main.cpp}
+    \subsection{Two-edge-connected Components}
+    \lstinputlisting{graph/2ecc/main.cpp}
+    \subsection{Three-edge-connected Components}
+    \lstinputlisting{graph/3ecc/main.cpp}
     \subsection{Dominator Tree}
     \lstinputlisting{graph/dominator/main.cpp}
+    \subsection{K Shortest Paths}
+    \lstinputlisting{graph/ksp/main.cpp}
+    \subsection{Global Minimum Cut}
+    \lstinputlisting{graph/gmc/main.cpp}
 
     \section{Tree}
     \subsection{Least Common Ancestor}
@@ -64,20 +72,31 @@
     \subsection{Suffix Array}
     \lstinputlisting{string/sa/main.cpp}
 
-    \section{Math}
+    \section{Number Theory}
     \subsection{Power}
     \lstinputlisting{math/pow/main.cpp}
+    \subsection{Sqrt}
+    Find $x$ such that $x^2\equiv y\pmod p$.
+    \newline Constraints: $p$ is prime and $0\le y<p$.
+    \lstinputlisting{math/sqrt/main.cpp}
     \subsection{Logarithm}
+    Find $k$ such that $x^k\equiv y\pmod n$.
+    \newline Constraints: $0\le x$, $y<n$.
     \lstinputlisting{math/log/main.cpp}
     \subsection{Miller Rabin}
     \lstinputlisting{math/mr/main.cpp}
     \subsection{Pollard Rho}
     \lstinputlisting{math/pr/main.cpp}
     \subsection{Primitive Root}
+    Constraints: $n=1$, $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
     \lstinputlisting{math/proot/main.cpp}
+    
+    \section{Numerical}
     \subsection{Golden Search}
     \lstinputlisting{math/golden/main.cpp}
-    \subsection{Theorems}
-    \input{math/theorems/main.tex}
+
+    \section{Convolution}
+
+    \section{Geometry}
 \end{multicols}
 \end{document}
