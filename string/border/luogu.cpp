@@ -14,7 +14,7 @@ vector<int> fborder(const string &s) {
   return res;
 }
 
-struct RangeMinimumQuery {
+struct SparseTable {
   vector<vector<int>> table;
   void init(const vector<int> &a) {
     int n = a.size(), h = bit_width(a.size());
@@ -34,7 +34,7 @@ struct RangeMinimumQuery {
 };
 
 struct LeastCommonAncestor {
-  RangeMinimumQuery rmq;
+  SparseTable st;
   vector<int> p, time, a, par;
   LeastCommonAncestor(const vector<vector<int>> &g, int root) {
     int n = g.size();
@@ -53,12 +53,12 @@ struct LeastCommonAncestor {
     dfs(root);
     a.resize(n);
     for (int i = 1; i < n; i += 1) { a[i] = time[par[p[i]]]; }
-    rmq.init(a);
+    st.init(a);
   }
   int query(int u, int v) {
     if (u == v) { return u; }
     if (time[u] > time[v]) { swap(u, v); }
-    return p[rmq.query(time[u] + 1, time[v] + 1)];
+    return p[st.query(time[u] + 1, time[v] + 1)];
   }
 };
 

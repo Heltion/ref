@@ -1,4 +1,4 @@
-// https://judge.yosupo.jp/problem/staticrmq
+// https://judge.yosupo.jp/problem/staticst
 #include <bits/stdc++.h>
 using i64 = int64_t;
 using namespace std;

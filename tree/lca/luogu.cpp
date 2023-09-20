@@ -3,7 +3,7 @@
 using namespace std;
 
 struct LeastCommonAncestor {
-  RangeMinimumQuery rmq;
+  SparseTable st;
   vector<int> p, time, a, par;
   LeastCommonAncestor(int root, const vector<vector<int>> &g) {
     int n = g.size();
@@ -22,12 +22,12 @@ struct LeastCommonAncestor {
     dfs(root);
     a.resize(n);
     for (int i = 1; i < n; i += 1) { a[i] = time[par[p[i]]]; }
-    rmq = RangeMinimumQuery(a);
+    st = SparseTable(a);
   }
   int query(int u, int v) {
     if (u == v) { return u; }
     if (time[u] > time[v]) { swap(u, v); }
-    return p[rmq.query(time[u] + 1, time[v] + 1)];
+    return p[st.query(time[u] + 1, time[v] + 1)];
   }
 };
 
