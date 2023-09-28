@@ -13,12 +13,13 @@
 \fancyhead[R]{\thepage}
 \fancyfoot{}
 \lstset{
+    morekeywords = {u64, i64, f64},
+    keywordstyle = \bf,
     language     = C++,
     basicstyle   = \tt\scriptsize,
     frame        = shadowbox,
     numbers      = left,
     breaklines   = true,
-    keywordstyle = \bf,
     commentstyle = \color{red}
 }
 \begin{document}
@@ -31,8 +32,8 @@
     \newpage
 
     \section{Graph}
-    \subsection{Euler's Circuit}
-    \lstinputlisting{graph/circuit/main.cpp}
+    \subsection{Euler Walk}
+    \lstinputlisting{graph/euler/main.cpp}
     \subsection{Strongly Connected Components}
     \lstinputlisting{graph/scc/main.cpp}
     \subsection{Two-vertex-connected Components}
@@ -58,19 +59,23 @@
     \subsection{Minimum Cost Maximum Flow}
     \lstinputlisting{graph/mcmf/main.cpp}
 
-    \section{Tree}
-    \subsection{Least Common Ancestor}
-    \lstinputlisting{tree/lca/main.cpp}
-
     \section{Data Structure}
     \subsection{Disjoint Set Union}
     \lstinputlisting{datastructure/dsu/main.cpp}
     \subsection{Sparse Table}
     \lstinputlisting{datastructure/st/main.cpp}
+    \subsection{Lines Maximum}
+    \lstinputlisting{datastructure/lines/main.cpp}
+    \subsection{Segments Maximum}
+    \lstinputlisting{datastructure/segments/main.cpp}
     \subsection{Treap}
     \lstinputlisting{datastructure/treap/main.cpp}
-    \subsection{Link Cut Tree}
+    \subsection{Tree}
+    \subsubsection{Least Common Ancestor}
+    \lstinputlisting{datastructure/tree/lca/main.cpp}
+    \subsubsection{Link Cut Tree}
     \lstinputlisting{datastructure/lct/main.cpp}
+
 
     \section{String}
     \subsection{Z}
@@ -91,13 +96,14 @@
     \lstinputlisting{string/pam/main.cpp}
 
     \section{Number Theory}
-    \subsection{Power}
+    \subsection{Modular Arithmetic}
+    \subsubsection{Power}
     \lstinputlisting{math/pow/main.cpp}
-    \subsection{Sqrt}
+    \subsubsection{Sqrt}
     Find $x$ such that $x^2\equiv y\pmod p$.
     \newline Constraints: $p$ is prime and $0\le y<p$.
     \lstinputlisting{math/sqrt/main.cpp}
-    \subsection{Logarithm}
+    \subsubsection{Logarithm}
     Find $k$ such that $x^k\equiv y\pmod n$.
     \newline Constraints: $0\le x$, $y<n$.
     \lstinputlisting{math/log/main.cpp}
@@ -106,7 +112,7 @@
     \subsection{Pollard Rho}
     \lstinputlisting{math/pr/main.cpp}
     \subsection{Primitive Root}
-    Constraints: $n=1$, $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
+    Constraints: $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
     \lstinputlisting{math/proot/main.cpp}
     \subsection{Extended Euclidean Algorithm}
     \lstinputlisting{math/exgcd/main.cpp}
@@ -124,5 +130,6 @@
     \lstinputlisting{convolution/fft/main.cpp}
 
     \section{Geometry}
+    \input{geometry/main.tex}
 \end{multicols}
 \end{document}
