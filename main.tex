@@ -6,6 +6,8 @@
 \usepackage{color}
 \usepackage[hidelinks]{hyperref}
 \usepackage{multicol}
+\usepackage{float}
+\usepackage{esint}
 \geometry{paperheight=21cm, paperwidth=29.7cm, left=1cm, right=1cm, top=1cm, bottom=1cm}
 \setlength{\columnsep}{2cm}
 \pagestyle{fancy}
@@ -32,16 +34,17 @@
     \newpage
 
     \section{Graph}
-    \subsection{Euler Walk}
-    \lstinputlisting{graph/euler/main.cpp}
-    \subsection{Strongly Connected Components}
+    \subsection{Connected Components}
+    \subsubsection{Strongly Connected Components}
     \lstinputlisting{graph/scc/main.cpp}
-    \subsection{Two-vertex-connected Components}
+    \subsubsection{Two-vertex-connected Components}
     \lstinputlisting{graph/2vcc/main.cpp}
-    \subsection{Two-edge-connected Components}
+    \subsubsection{Two-edge-connected Components}
     \lstinputlisting{graph/2ecc/main.cpp}
-    \subsection{Three-edge-connected Components}
+    \subsubsection{Three-edge-connected Components}
     \lstinputlisting{graph/3ecc/main.cpp}
+    \subsection{Euler Walks}
+    \lstinputlisting{graph/euler/main.cpp}
     \subsection{Dominator Tree}
     \lstinputlisting{graph/dominator/main.cpp}
     \subsection{Directed Minimum Spanning Tree}
@@ -64,12 +67,14 @@
     \lstinputlisting{datastructure/dsu/main.cpp}
     \subsection{Sparse Table}
     \lstinputlisting{datastructure/st/main.cpp}
+    \subsection{Treap}
+    \lstinputlisting{datastructure/treap/main.cpp}
     \subsection{Lines Maximum}
     \lstinputlisting{datastructure/lines/main.cpp}
     \subsection{Segments Maximum}
     \lstinputlisting{datastructure/segments/main.cpp}
-    \subsection{Treap}
-    \lstinputlisting{datastructure/treap/main.cpp}
+    \subsection{Segment Beats}
+    \lstinputlisting{datastructure/beat/main.cpp}
     \subsection{Tree}
     \subsubsection{Least Common Ancestor}
     \lstinputlisting{datastructure/tree/lca/main.cpp}
@@ -107,6 +112,8 @@
     Find $k$ such that $x^k\equiv y\pmod n$.
     \newline Constraints: $0\le x$, $y<n$.
     \lstinputlisting{math/log/main.cpp}
+    \subsection{Chinese Remainder Theorem}
+    \lstinputlisting{math/crt/main.cpp}
     \subsection{Miller Rabin}
     \lstinputlisting{math/mr/main.cpp}
     \subsection{Pollard Rho}
@@ -114,16 +121,18 @@
     \subsection{Primitive Root}
     Constraints: $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
     \lstinputlisting{math/proot/main.cpp}
-    \subsection{Extended Euclidean Algorithm}
-    \lstinputlisting{math/exgcd/main.cpp}
-    \subsection{Linear Equations}
-    \lstinputlisting{math/crt/main.cpp}
-    
+    \subsection{Sum of Floor}
+    \lstinputlisting{math/sumfloor/main.cpp}
+    \subsection{Minimum of Remainder}
+    \lstinputlisting{math/minmod/main.cpp}
+    \input{math/theorems/nt.tex}
+
     \section{Numerical}
     \subsection{Golden Search}
     \lstinputlisting{math/golden/main.cpp}
     \subsection{Adaptive Simpson}
     \lstinputlisting{math/simpson/main.cpp}
+    \input{math/theorems/int.tex}
 
     \section{Convolution}
     \subsection{Fast Fourier Transform}
