@@ -8,7 +8,8 @@
 \usepackage{multicol}
 \usepackage{float}
 \usepackage{esint}
-\geometry{paperheight=21cm, paperwidth=29.7cm, left=1cm, right=1cm, top=1cm, bottom=1cm}
+\usepackage{amssymb}
+\geometry{paperheight=21cm, paperwidth=29.7cm, left=1cm, right=1cm, top=1cm, bottom=2cm}
 \setlength{\columnsep}{2cm}
 \pagestyle{fancy}
 \fancyhead[L]{Team Reference Document}
@@ -24,7 +25,7 @@
     breaklines   = true,
     commentstyle = \color{red}
 }
-\pagestyle{headings}
+\pagestyle{plain}
 \begin{document}
 \title{Team Reference Document}
 \author{Heltion}
@@ -33,34 +34,50 @@
 \begin{multicols}{2}
     \tableofcontents
     \newpage
+    \setcounter{page}{1}
+    \scriptsize
 
     \section{Graph}
     \subsection{Connected Components}
     \subsubsection{Strongly Connected Components}
+    Returns strongly connected components in topologically order.
     \lstinputlisting{graph/scc/main.cpp}
+
     \subsubsection{Two-vertex-connected Components}
     \lstinputlisting{graph/2vcc/main.cpp}
+
     \subsubsection{Two-edge-connected Components}
     \lstinputlisting{graph/2ecc/main.cpp}
+
     \subsubsection{Three-edge-connected Components}
     \lstinputlisting{graph/3ecc/main.cpp}
+
     \subsection{Euler Walks}
     \lstinputlisting{graph/euler/main.cpp}
+
     \subsection{Dominator Tree}
     \lstinputlisting{graph/dominator/main.cpp}
+
     \subsection{Directed Minimum Spanning Tree}
     \lstinputlisting{graph/dmst/main.cpp}
+
     \subsection{K Shortest Paths}
     \lstinputlisting{graph/ksp/main.cpp}
+
     \subsection{Global Minimum Cut}
     \lstinputlisting{graph/gmc/main.cpp}
+
     \subsection{Minimum Perfect Matching on Bipartite Graph}
     \lstinputlisting{graph/km/main.cpp}
+
     \subsection{Matching on General Graph}
     \lstinputlisting{graph/match/main.cpp}
+
     \subsection{Maximum Flow}
     \lstinputlisting{graph/flow/main.cpp}
+
     \subsection{Minimum Cost Maximum Flow}
+    Constraints: there is no edge with negative cost.
     \lstinputlisting{graph/mcmf/main.cpp}
 
     \section{Data Structure}
@@ -103,8 +120,6 @@
 
     \section{Number Theory}
     \subsection{Modular Arithmetic}
-    \subsubsection{Power}
-    \lstinputlisting{math/pow/main.cpp}
     \subsubsection{Sqrt}
     Find $x$ such that $x^2\equiv y\pmod p$.
     \newline Constraints: $p$ is prime and $0\le y<p$.
@@ -120,11 +135,13 @@
     \subsection{Pollard Rho}
     \lstinputlisting{math/pr/main.cpp}
     \subsection{Primitive Root}
-    Constraints: $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
+    Constraints: $n$ = $2$, $4$, $p^k$, $2p^{k}$ where $p$ is odd prime.
     \lstinputlisting{math/proot/main.cpp}
     \subsection{Sum of Floor}
+    Returns $\sum_{i=0}^{n-1}\lfloor\frac{ai+b}{m}\rfloor$.
     \lstinputlisting{math/sumfloor/main.cpp}
     \subsection{Minimum of Remainder}
+    Returns $\min\{(ai+b)\bmod m:0\le i<n\}$.
     \lstinputlisting{math/minmod/main.cpp}
     \input{math/theorems/nt.tex}
 
@@ -133,10 +150,13 @@
     \lstinputlisting{math/golden/main.cpp}
     \subsection{Adaptive Simpson}
     \lstinputlisting{math/simpson/main.cpp}
+    \subsection{Simplex}
+    Returns maximum of $cx$ s.t. $ax\le b$ and $x\ge 0$.
+    \lstinputlisting{math/simplex/main.cpp}
     \input{math/theorems/int.tex}
 
     \section{Convolution}
-    \subsection{Fast Fourier Transform}
+    \subsection{$(\mathbb{R}, \times, +)$ on $(\mathbb{Z}, +)$}
     \lstinputlisting{convolution/fft/main.cpp}
 
     \section{Geometry}
