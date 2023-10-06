@@ -40,8 +40,8 @@
     \section{Contest}
     \subsection{Makefile}
     \lstinputlisting{misc/Makefile}
-    \subsection{Formatter}
-    \lstinputlisting{misc/format.json}
+    \subsection{.clang-format}
+    \lstinputlisting{misc/.clang-format}
 
     \section{Graph}
     \subsection{Connected Components}
@@ -149,7 +149,6 @@
     \subsection{Minimum of Remainder}
     Returns $\min\{(ai+b)\bmod m:0\le i<n\}$.
     \lstinputlisting{math/minmod/main.cpp}
-    \input{math/theorems/nt.tex}
 
     \section{Numerical}
     \subsection{Golden Search}
@@ -162,8 +161,15 @@
     \input{math/theorems/int.tex}
 
     \section{Convolution}
-    \subsection{$(\mathbb{R}, \times, +)$ on $(\mathbb{Z}, +)$}
+    \subsection{Fast Fourier Transform on $\mathbb{C}$}
     \lstinputlisting{convolution/fft/main.cpp}
+    \subsection{Formal Power Series on $\mathbb{F}_p$}
+    \lstinputlisting{convolution/ntt/main.cpp}
+    \input{convolution/ntt/main.tex}
+    \subsection{Circular Transform}
+    $$A_{ij}=w_k^{ij}, A^{-1}_{ij}=\frac{1}{k}w_k^{-ij}.$$
+    \subsection{Truncated Transform}
+    $$\sum_{j=0}^{n-1}\frac{i}{\prod_{k=0}^{j}m_k}\bmod n {\rm for} 0\le i < \prod_{j=0}^{n-1}m_k.$$
 
     \section{Geometry}
     \input{geometry/main.tex}

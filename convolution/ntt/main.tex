@@ -1,0 +1,26 @@
+\subsubsection{Newton's Method}
+$$h=g(f) \leftrightarrows G(h)=f-g^{-1}(h)\equiv 0.$$
+$$h=h_0-\frac{G(h_0)}{G'(h_0)}.$$
+
+\subsubsection{Arithmetic}
+
+For $f=pg+q$, $p^T=f^Tg^T{-1}$.
+
+For $h=\frac1{f}$, $h=h_0(2-h_0f)$.
+
+For $h=\sqrt{f}$, $h=\frac12(h_0+\frac{f}{h_0})$.
+
+For $h=\log f$, $h=\int\frac{df}{f}$.
+
+For $h=\exp f$, $h=h_0(1+f-\log h_0)$.
+
+\subsubsection{Interpolation}
+
+$$g(x)=\prod_{i}(x-x_i)$$
+$$f(x)=\sum_{i=0}^{n-1}y_i(\prod_{j\ne i}\frac{x-x_j}{x_i-x_j}).$$
+$$f(x)=\sum_{i=0}^{n-1}\frac{y_i}{g'(x_i)}\prod_{j\ne i}(x-x_j).$$
+
+\subsubsection{Primes with root $3$}
+$469762049=7\times2^{26} + 1.$
+
+\noindent $4179340454199820289=29\times2^{57}+1.$

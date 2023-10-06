@@ -9,7 +9,7 @@ struct Mv {
     smv = tmv = def();
     cmv = 1;
   }
-  void up(const Mv &ls, const Mv &rs) {
+  void up(const Mv& ls, const Mv& rs) {
     mv = mmv(ls.mv, rs.mv);
     smv = mmv(ls.mv == mv ? ls.smv : ls.mv, rs.mv == mv ? rs.smv : rs.mv);
     cmv = (ls.mv == mv ? ls.cmv : 0) + (rs.mv == mv ? rs.cmv : 0);

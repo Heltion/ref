@@ -9,8 +9,7 @@ void fft(vector<complex<f64>> &a, bool inverse) {
     if (i < r[i]) { swap(a[i], a[r[i]]); }
   }
   for (int m = 1; m < n; m *= 2) {
-    complex<f64> wn(cos(numbers::pi / m),
-                    sin((inverse ? -1 : 1) * numbers::pi / m));
+    complex<f64> wn(exp((inverse ? 1.i : -1.i) * numbers::pi / (f64)m));
     for (int i = 0; i < n; i += m * 2) {
       complex<f64> w = 1;
       for (int j = 0; j < m; j += 1, w = w * wn) {

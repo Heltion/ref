@@ -1,3 +1,8 @@
+#include <bits/stdc++.h>
+using namespace std;
+using i64 = int64_t;
+using f64 = double_t;
+
 template <typename T>
 T eps = 0;
 template <>
@@ -17,6 +22,48 @@ struct P {
   bool operator==(P p) { return sign(x - p.x) == 0 and sign(y - p.y) == 0; }
   int arg() { return y < 0 or (y == 0 and x > 0) ? -1 : x or y; }
 };
+#if __cplusplus <= 202000L
+namespace cpp20 {
+// For the fucking online judges which do not support cpp20
+namespace views {
+struct Reverse {
+} reverse;
+vector<P<i64>> operator|(vector<P<i64>> p, Reverse& r) {
+  std::reverse(p.begin(), p.end());
+  assert(&r == &reverse);
+  return p;
+}
+pair<int, int> iota(int l, int r) {
+  return pair(l, r);
+}
+}  // namespace views
+namespace ranges {
+void sort(vector<P<i64>>& p,
+          i64 cmp,
+          const function<pair<i64, i64>(P<i64>)>& proj) {
+  std::sort(p.begin(), p.end(),
+            [&](P<i64> a, P<i64> b) { return proj(a) < proj(b); });
+  assert(not cmp);
+}
+int partition_point(pair<int, int> p, const function<bool(int)>& pred) {
+  int l = p.first - 1, r = p.second;
+  while (l + 1 < r) {
+    int m = l + (r - l) / 2;
+    if (pred(m)) {
+      l = m;
+    } else {
+      r = m;
+    }
+  }
+  return r;
+}
+}  // namespace ranges
+int ssize(const vector<P<i64>>& p) {
+  return p.size();
+}
+}  // namespace cpp20
+using namespace cpp20;
+#endif
 template <typename T>
 bool argument(P<T> lhs, P<T> rhs) {
   if (lhs.arg() != rhs.arg()) { return lhs.arg() < rhs.arg(); }
@@ -104,4 +151,22 @@ struct G {
 template <typename T>
 vector<L<T>> half_plane(vector<L<T>> ls) {
   deque<L<T>> q;
+}
+int main() {
+  cin.tie(nullptr)->sync_with_stdio(false);
+  int n;
+  cin >> n;
+  G<i64> g(n);
+  for (auto& [x, y] : g.g) { cin >> x >> y; }
+  reverse(g.g.begin(), g.g.end());
+  int m;
+  cin >> m;
+  bool ans = true;
+  for (int i = 0; i < m; i += 1) {
+    P<i64> q;
+    cin >> q.x >> q.y;
+    auto c = g.contains(q);
+    ans = ans and c and c.value();
+  }
+  cout << (ans ? "YES" : "NO");
 }
