@@ -9,7 +9,7 @@
 \usepackage{float}
 \usepackage{esint}
 \usepackage{amssymb}
-\geometry{paperheight=21cm, paperwidth=29.7cm, left=1cm, right=1cm, top=1cm, bottom=2cm}
+\geometry{paperheight=21cm, paperwidth=29.7cm, left=0.75cm, right=0.5cm, top=1cm, bottom=2cm}
 \setlength{\columnsep}{2cm}
 \pagestyle{fancy}
 \fancyhead[L]{Team Reference Document}
@@ -19,13 +19,16 @@
     morekeywords = {u64, i64, f64},
     keywordstyle = \bf,
     language     = C++,
-    basicstyle   = \tt\scriptsize,
-    frame        = shadowbox,
+    basicstyle   = \tt\footnotesize,
+    frame        = single,
     numbers      = left,
-    breaklines   = true,
+    numberstyle   = \scriptsize,
+    breaklines   = false,
     commentstyle = \color{red}
 }
 \pagestyle{plain}
+\setlength\columnsep{0.8cm}
+
 \begin{document}
 \title{Team Reference Document}
 \author{Heltion}
@@ -35,7 +38,7 @@
     \tableofcontents
     \newpage
     \setcounter{page}{1}
-    \scriptsize
+    \footnotesize
 
     \section{Contest}
     \subsection{Makefile}

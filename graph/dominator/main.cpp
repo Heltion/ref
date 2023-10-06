@@ -1,4 +1,4 @@
-vector<int> dominator(const vector<vector<int>> &g, int s) {
+vector<int> dominator(const vector<vector<int>>& g, int s) {
   int n = g.size();
   vector<int> pos(n, -1), p, label(n), dom(n), sdom(n), dsu(n), par(n);
   vector<vector<int>> rg(n), bucket(n);

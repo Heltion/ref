@@ -14,7 +14,9 @@ struct P {
   T len2() { return x * x + y * y; }
   T cross(P p) { return x * p.y - y * p.x; }
   T dot(P p) { return x * p.x + y * p.y; }
-  bool operator==(P p) { return sign(x - p.x) == 0 and sign(y - p.y) == 0; }
+  bool operator==(P p) {
+    return sign(x - p.x) == 0 and sign(y - p.y) == 0;
+  }
   int arg() { return y < 0 or (y == 0 and x > 0) ? -1 : x or y; }
 };
 template <typename T>
@@ -28,7 +30,8 @@ struct L {
   L(P<T> a = {}, P<T> b = {}) : a(a), b(b) {}
   P<T> v() { return b - a; }
   bool contains(P<T> p) {
-    return sign((p - a).cross(p - b)) == 0 and sign((p - a).dot(p - b)) <= 0;
+    return sign((p - a).cross(p - b)) == 0 and
+           sign((p - a).dot(p - b)) <= 0;
   }
   int left(P<T> p) { return sign(v().cross(p - a)); }
 };

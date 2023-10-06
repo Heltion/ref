@@ -4,4 +4,4 @@ TabWidth: 2
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
 AllowShortBlocksOnASingleLine: true
-ColumnLimit: 80 
+ColumnLimit: 77

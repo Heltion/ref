@@ -77,7 +77,9 @@ struct Node {
   void ch(int tl, int tr, int l, int r, i64 x, bool less) {
     auto &lhs = less ? mn : mx, &rhs = less ? mx : mn;
     if (not cmp(x, rhs.mv, less)) { return; }
-    if (tl >= l and tr <= r and cmp(rhs.smv, x, less)) { return ch(x, less); }
+    if (tl >= l and tr <= r and cmp(rhs.smv, x, less)) {
+      return ch(x, less);
+    }
     down(tl, tr);
     int tm = midpoint(tl, tr);
     if (l < tm) { ls->ch(tl, tm, l, r, x, less); }

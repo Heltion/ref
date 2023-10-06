@@ -1,7 +1,9 @@
 void fft(vector<i64>& a, bool inverse) {
   int n = a.size();
   vector<int> r(n);
-  for (int i = 0; i < n; i += 1) { r[i] = r[i / 2] / 2 | (i % 2 ? n / 2 : 0); }
+  for (int i = 0; i < n; i += 1) {
+    r[i] = r[i / 2] / 2 | (i % 2 ? n / 2 : 0);
+  }
   for (int i = 0; i < n; i += 1) {
     if (i < r[i]) { swap(a[i], a[r[i]]); }
   }
