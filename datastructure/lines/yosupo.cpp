@@ -2,12 +2,11 @@
 using namespace std;
 using i64 = int64_t;
 struct Line {
-  static bool q;
   mutable i64 k, b, p;
-  bool operator<(const Line &rhs) const { return q ? p < rhs.p : k < rhs.k; }
+  bool operator<(const Line& rhs) const { return k < rhs.k; }
+  bool operator<(const i64& x) const { return p < x; }
 };
-bool Line::q = false;
-struct Lines : multiset<Line> {
+struct Lines : multiset<Line, less<>> {
   static constexpr i64 inf = numeric_limits<i64>::max();
   static i64 div(i64 a, i64 b) { return a / b - ((a ^ b) < 0 and a % b); }
   bool isect(iterator x, iterator y) {
@@ -20,7 +19,6 @@ struct Lines : multiset<Line> {
     return x->p >= y->p;
   }
   void add(i64 k, i64 b) {
-    Line::q = false;
     auto z = insert({k, b, 0}), y = z++, x = y;
     while (isect(y, z)) { z = erase(z); }
     if (x != begin() and isect(--x, y)) { isect(x, y = erase(y)); }
@@ -28,8 +26,7 @@ struct Lines : multiset<Line> {
   }
   optional<i64> get(i64 x) {
     if (empty()) { return {}; }
-    Line::q = true;
-    auto it = lower_bound({0, 0, x});
+    auto it = lower_bound(x);
     return it->k * x + it->b;
   }
 };
