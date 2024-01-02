@@ -7,4 +7,4 @@ using t = tree<int,
                less<int>,
                rb_tree_tag,
                tree_order_statistics_node_update>;
-using p = __gnu_pbds::<int, less<int>, pairing_heap_tag>;
+using p = __gnu_pbds::priority_queue<int, less<int>, pairing_heap_tag>;
