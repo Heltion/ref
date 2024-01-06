@@ -68,3 +68,64 @@ struct HighestLabelPreflowPush {
     return i64(0);
   }
 };
+
+struct Dinic {
+  int n;
+  vector<vector<int>> g;
+  vector<Edge> edges;
+  vector<int> level;
+  Dinic(int n) : n(n), g(n) {}
+  int add(int u, int v, i64 f) {
+    if (u == v) { return -1; }
+    int i = ssize(edges);
+    edges.push_back({u, v, f});
+    g[u].push_back(i);
+    edges.push_back({v, u, 0});
+    g[v].push_back(i + 1);
+    return i;
+  }
+  i64 max_flow(int s, int t) {
+    i64 flow = 0;
+    queue<int> q;
+    vector<int> cur;
+    auto bfs = [&]() {
+      level.assign(n, -1);
+      level[s] = 0;
+      q.push(s);
+      while (not q.empty()) {
+        int u = q.front();
+        q.pop();
+        for (int i : g[u]) {
+          auto [_, v, c] = edges[i];
+          if (c and level[v] == -1) {
+            level[v] = level[u] + 1;
+            q.push(v);
+          }
+        }
+      }
+      return ~level[t];
+    };
+    auto dfs = [&](auto& dfs, int u, i64 limit) -> i64 {
+      if (u == t) { return limit; }
+      i64 res = 0;
+      for (int& i = cur[u]; i < ssize(g[u]) and limit; i += 1) {
+        int j = g[u][i];
+        auto [_, v, f] = edges[j];
+        if (level[v] == level[u] + 1 and f) {
+          if (i64 d = dfs(dfs, v, min(f, limit)); d) {
+            limit -= d;
+            res += d;
+            edges[j].f -= d;
+            edges[j ^ 1].f += d;
+          }
+        }
+      }
+      return res;
+    };
+    while (bfs()) {
+      cur.assign(n, 0);
+      while (i64 f = dfs(dfs, s, numeric_limits<i64>::max())) { flow += f; }
+    }
+    return flow;
+  }
+};
