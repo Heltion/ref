@@ -3,7 +3,6 @@ using namespace std;
 template <class T, size_t size = tuple_size<T>::value>
 string to_debug(T, string s = "")
   requires(not ranges::range<T>);
-
 string to_debug(auto x)
   requires requires(ostream& os) { os << x; }
 {

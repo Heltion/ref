@@ -1,13 +1,7 @@
-template <typename T>
-T eps = 0;
-template <>
-f64 eps<f64> = 1e-9;
-template <typename T>
-int sign(T x) {
-  return x < -eps<T> ? -1 : x > eps<T>;
-}
-template <typename T>
-struct P {
+template <typename T> T eps = 0;
+template <> f64 eps<f64> = 1e-9;
+template <typename T> int sign(T x) { return x < -eps<T> ? -1 : x > eps<T>; }
+template <typename T> struct P {
   T x, y;
   explicit P(T x = 0, T y = 0) : x(x), y(y) {}
   P operator*(T k) { return P(x * k, y * k); }
@@ -21,13 +15,11 @@ struct P {
   int arg() { return y < 0 or (y == 0 and x > 0) ? -1 : x or y; }
   P rotate90() { return P(-y, x); }
 };
-template <typename T>
-bool argument(P<T> lhs, P<T> rhs) {
+template <typename T> bool argument(P<T> lhs, P<T> rhs) {
   if (lhs.arg() != rhs.arg()) { return lhs.arg() < rhs.arg(); }
   return lhs.cross(rhs) > 0;
 }
-template <typename T>
-struct L {
+template <typename T> struct L {
   P<T> a, b;
   explicit L(P<T> a = {}, P<T> b = {}) : a(a), b(b) {}
   P<T> v() { return b - a; }
@@ -42,8 +34,7 @@ struct L {
     return y < 0 ? pair(-x, -y) : pair(x, y);
   }
 };
-template <typename T>
-struct G {
+template <typename T> struct G {
   vector<P<T>> g;
   explicit G(int n) : g(n) {}
   explicit G(const vector<P<T>>& g) : g(g) {}
@@ -135,8 +126,7 @@ struct G {
   }
 };
 
-template <typename T>
-vector<L<T>> half(vector<L<T>> ls, T bound) {
+template <typename T> vector<L<T>> half(vector<L<T>> ls, T bound) {
   // Ranges: bound ^ 6
   auto check = [](L<T> a, L<T> b, L<T> c) {
     auto [x, y] = b.intersection(c).value();
