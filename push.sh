@@ -1,1 +1,3 @@
-git add . && git commit -m "`git status -s`" && git push
+git add .
+git commit -m "`git status -s`"
+git push
