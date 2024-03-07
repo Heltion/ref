@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>>
-two_vertex_connected_components(const vector<vector<int>> &g) {
+vector<vector<int>> two_vertex_connected_components(
+    const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> pos(n, -1), stack;
   vector<vector<int>> res;
@@ -47,9 +47,11 @@ int main() {
   }
   auto bcc = two_vertex_connected_components(g);
   cout << bcc.size() << "\n";
-  for (const auto &cc : bcc) {
+  for (const auto& cc : bcc) {
     cout << cc.size();
-    for (int u : cc) { cout << " " << u; }
+    for (int u : cc) {
+      cout << " " << u;
+    }
     cout << "\n";
   }
 }

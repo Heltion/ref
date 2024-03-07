@@ -4,15 +4,19 @@ constexpr int sigma = 26;
 struct Node {
   int link, len;
   array<int, sigma> next;
-  Node() : link(-1), len(0) { next.fill(-1); }
+  Node()
+      : link(-1), len(0) { next.fill(-1); }
 };
 struct SuffixAutomaton : vector<Node> {
-  SuffixAutomaton() : vector<Node>(1) {}
+  SuffixAutomaton()
+      : vector<Node>(1) {}
   int extend(int p, int c) {
     if (~at(p).next[c]) {
       // For online multiple strings.
       int q = at(p).next[c];
-      if (at(p).len + 1 == at(q).len) { return q; }
+      if (at(p).len + 1 == at(q).len) {
+        return q;
+      }
       int clone = size();
       push_back(at(q));
       back().len = at(p).len + 1;
@@ -61,11 +65,14 @@ int main() {
     string s;
     cin >> s;
     int p = 0;
-    for (char c : s) { p = sam.extend(p, c - 'a'); }
+    for (char c : s) {
+      p = sam.extend(p, c - 'a');
+    }
   }
   i64 ans = 0;
   for (int i = 1; i < sam.size(); i += 1) {
     ans += sam[i].len - sam[sam[i].link].len;
   }
-  cout << ans << "\n" << sam.size() << "\n";
+  cout << ans << "\n"
+       << sam.size() << "\n";
 }

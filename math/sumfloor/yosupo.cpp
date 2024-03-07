@@ -15,7 +15,9 @@ u64 sum_of_floor(u64 n, u64 m, u64 a, u64 b) {
       b %= m;
     }
     u64 y = a * n + b;
-    if (y < m) { break; }
+    if (y < m) {
+      break;
+    }
     tie(n, m, a, b) = tuple(y / m, a, m, y % m);
   }
   return ans;

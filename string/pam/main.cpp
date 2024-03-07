@@ -1,7 +1,8 @@
 struct Node {
   int sum, len, link;
   array<int, sigma> next;
-  Node(int len) : len(len) {
+  Node(int len)
+      : len(len) {
     sum = link = 0;
     next.fill(0);
   }
@@ -9,13 +10,15 @@ struct Node {
 struct PalindromicTree : vector<Node> {
   int last;
   vector<int> s;
-  PalindromicTree() : last(0) {
+  PalindromicTree()
+      : last(0) {
     emplace_back(0);
     emplace_back(-1);
     at(0).link = 1;
   }
   int get_link(int u, int i) {
-    while (i < at(u).len + 1 or s[i - at(u).len - 1] != s[i]) u = at(u).link;
+    while (i < at(u).len + 1 or s[i - at(u).len - 1] != s[i])
+      u = at(u).link;
     return u;
   }
   void extend(int i) {

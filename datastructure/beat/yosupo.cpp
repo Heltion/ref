@@ -8,27 +8,33 @@ struct Mv {
   bool less;
   i64 def() { return less ? inf : -inf; }
   i64 mmv(i64 x, i64 y) { return less ? min(x, y) : max(x, y); }
-  Mv(i64 x, bool less) : less(less) {
+  Mv(i64 x, bool less)
+      : less(less) {
     mv = x;
     smv = tmv = def();
     cmv = 1;
   }
-  void up(const Mv &ls, const Mv &rs) {
+  void up(const Mv& ls, const Mv& rs) {
     mv = mmv(ls.mv, rs.mv);
     smv = mmv(ls.mv == mv ? ls.smv : ls.mv, rs.mv == mv ? rs.smv : rs.mv);
     cmv = (ls.mv == mv ? ls.cmv : 0) + (rs.mv == mv ? rs.cmv : 0);
   }
   void add(i64 x) {
     mv += x;
-    if (smv != def()) { smv += x; }
-    if (tmv != def()) { tmv += x; }
+    if (smv != def()) {
+      smv += x;
+    }
+    if (tmv != def()) {
+      tmv += x;
+    }
   }
 };
 struct Node {
   Mv mn, mx;
   i64 sum, tsum;
   Node *ls, *rs;
-  Node(i64 x = 0) : sum(x), tsum(0), mn(x, true), mx(x, false) {
+  Node(i64 x = 0)
+      : sum(x), tsum(0), mn(x, true), mx(x, false) {
     ls = rs = nullptr;
   }
   void up() {
@@ -63,38 +69,66 @@ struct Node {
   }
   void ch(i64 x, bool less) {
     auto &lhs = less ? mn : mx, &rhs = less ? mx : mn;
-    if (not cmp(x, rhs.mv, less)) { return; }
+    if (not cmp(x, rhs.mv, less)) {
+      return;
+    }
     sum += (x - rhs.mv) * rhs.cmv;
-    if (lhs.smv == rhs.mv) { lhs.smv = x; }
-    if (lhs.mv == rhs.mv) { lhs.mv = x; }
-    if (cmp(x, rhs.tmv, less)) { rhs.tmv = x; }
+    if (lhs.smv == rhs.mv) {
+      lhs.smv = x;
+    }
+    if (lhs.mv == rhs.mv) {
+      lhs.mv = x;
+    }
+    if (cmp(x, rhs.tmv, less)) {
+      rhs.tmv = x;
+    }
     rhs.mv = lhs.tmv = x;
   }
   void add(int tl, int tr, int l, int r, i64 x) {
-    if (tl >= l and tr <= r) { return add(tl, tr, x); }
+    if (tl >= l and tr <= r) {
+      return add(tl, tr, x);
+    }
     down(tl, tr);
     int tm = midpoint(tl, tr);
-    if (l < tm) { ls->add(tl, tm, l, r, x); }
-    if (r > tm) { rs->add(tm, tr, l, r, x); }
+    if (l < tm) {
+      ls->add(tl, tm, l, r, x);
+    }
+    if (r > tm) {
+      rs->add(tm, tr, l, r, x);
+    }
     up();
   }
   void ch(int tl, int tr, int l, int r, i64 x, bool less) {
     auto &lhs = less ? mn : mx, &rhs = less ? mx : mn;
-    if (not cmp(x, rhs.mv, less)) { return; }
-    if (tl >= l and tr <= r and cmp(rhs.smv, x, less)) { return ch(x, less); }
+    if (not cmp(x, rhs.mv, less)) {
+      return;
+    }
+    if (tl >= l and tr <= r and cmp(rhs.smv, x, less)) {
+      return ch(x, less);
+    }
     down(tl, tr);
     int tm = midpoint(tl, tr);
-    if (l < tm) { ls->ch(tl, tm, l, r, x, less); }
-    if (r > tm) { rs->ch(tm, tr, l, r, x, less); }
+    if (l < tm) {
+      ls->ch(tl, tm, l, r, x, less);
+    }
+    if (r > tm) {
+      rs->ch(tm, tr, l, r, x, less);
+    }
     up();
   }
   i64 get(int tl, int tr, int l, int r) {
-    if (tl >= l and tr <= r) { return sum; }
+    if (tl >= l and tr <= r) {
+      return sum;
+    }
     down(tl, tr);
     i64 res = 0;
     int tm = midpoint(tl, tr);
-    if (l < tm) { res += ls->get(tl, tm, l, r); }
-    if (r > tm) { res += rs->get(tm, tr, l, r); }
+    if (l < tm) {
+      res += ls->get(tl, tm, l, r);
+    }
+    if (r > tm) {
+      res += rs->get(tm, tr, l, r);
+    }
     return res;
   }
 };
@@ -104,8 +138,10 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<i64> a(n);
-  for (i64 &ai : a) { cin >> ai; }
-  function<void(Node *&, int, int)> rec = [&](Node *&p, int tl, int tr) {
+  for (i64& ai : a) {
+    cin >> ai;
+  }
+  function<void(Node*&, int, int)> rec = [&](Node*& p, int tl, int tr) {
     int tm = midpoint(tl, tr);
     if (tl + 1 == tr) {
       p = new Node(a[tm]);
@@ -116,7 +152,7 @@ int main() {
     rec(p->rs, tm, tr);
     p->up();
   };
-  Node *root = nullptr;
+  Node* root = nullptr;
   rec(root, 0, n);
   for (int i = 0; i < q; i += 1) {
     int t, l, r;
@@ -124,9 +160,15 @@ int main() {
     if (t != 3) {
       i64 b;
       cin >> b;
-      if (t == 0) { root->ch(0, n, l, r, b, true); }
-      if (t == 1) { root->ch(0, n, l, r, b, false); }
-      if (t == 2) { root->add(0, n, l, r, b); }
+      if (t == 0) {
+        root->ch(0, n, l, r, b, true);
+      }
+      if (t == 1) {
+        root->ch(0, n, l, r, b, false);
+      }
+      if (t == 2) {
+        root->add(0, n, l, r, b);
+      }
     } else {
       cout << root->get(0, n, l, r) << "\n";
     }

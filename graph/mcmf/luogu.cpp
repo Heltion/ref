@@ -11,7 +11,8 @@ struct MinimumCostMaximumFlow {
   int n;
   vector<Edge> edges;
   vector<vector<int>> g;
-  MinimumCostMaximumFlow(int n) : n(n), g(n) {}
+  MinimumCostMaximumFlow(int n)
+      : n(n), g(n) {}
   int add_edge(int u, int v, i64 f, i64 c) {
     int i = edges.size();
     edges.push_back({u, v, f, c});
@@ -32,7 +33,9 @@ struct MinimumCostMaximumFlow {
       while (not q.empty()) {
         auto [du, u] = q.top();
         q.pop();
-        if (du > d[u]) { continue; }
+        if (du > d[u]) {
+          continue;
+        }
         for (int i : g[u]) {
           auto [_, v, f, c] = edges[i];
           if (f and d[v] > d[u] + h[u] - h[v] + c) {
@@ -45,9 +48,13 @@ struct MinimumCostMaximumFlow {
     };
     i64 f = 0, c = 0;
     while (dijkstra()) {
-      for (int i = 0; i < n; i += 1) { h[i] += d[i]; }
+      for (int i = 0; i < n; i += 1) {
+        h[i] += d[i];
+      }
       vector<int> path;
-      for (int u = t; u != s; u = edges[p[u]].u) { path.push_back(p[u]); }
+      for (int u = t; u != s; u = edges[p[u]].u) {
+        path.push_back(p[u]);
+      }
       i64 mf =
           edges[ranges::min(path, {}, [&](int i) { return edges[i].f; })].f;
       f += mf;

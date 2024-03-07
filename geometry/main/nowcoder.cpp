@@ -14,7 +14,8 @@ int sign(T x) {
 template <typename T>
 struct P {
   T x, y;
-  explicit P(T x = 0, T y = 0) : x(x), y(y) {}
+  explicit P(T x = 0, T y = 0)
+      : x(x), y(y) {}
   P operator*(T k) { return P(x * k, y * k); }
   P operator+(P p) { return P(x + p.x, y + p.y); }
   P operator-(P p) { return P(x - p.x, y - p.y); }
@@ -76,13 +77,16 @@ using namespace cpp20;
 #endif
 template <typename T>
 bool argument(P<T> lhs, P<T> rhs) {
-  if (lhs.arg() != rhs.arg()) { return lhs.arg() < rhs.arg(); }
+  if (lhs.arg() != rhs.arg()) {
+    return lhs.arg() < rhs.arg();
+  }
   return lhs.cross(rhs) > 0;
 }
 template <typename T>
 struct L {
   P<T> a, b;
-  explicit L(P<T> a = {}, P<T> b = {}) : a(a), b(b) {}
+  explicit L(P<T> a = {}, P<T> b = {})
+      : a(a), b(b) {}
   P<T> v() { return b - a; }
   bool contains(P<T> p) {
     return sign((p - a).cross(p - b)) == 0 and sign((p - a).dot(p - b)) <= 0;
@@ -90,7 +94,9 @@ struct L {
   int left(P<T> p) { return sign(v().cross(p - a)); }
   optional<pair<T, T>> intersection(L l) {
     auto y = v().cross(l.v());
-    if (sign(y) == 0) { return {}; }
+    if (sign(y) == 0) {
+      return {};
+    }
     auto x = (l.a - a).cross(l.v());
     return y < 0 ? pair(-x, -y) : pair(x, y);
   }
@@ -98,19 +104,33 @@ struct L {
 template <typename T>
 struct G {
   vector<P<T>> g;
-  explicit G(int n) : g(n) {}
-  explicit G(const vector<P<T>>& g) : g(g) {}
+  explicit G(int n)
+      : g(n) {}
+  explicit G(const vector<P<T>>& g)
+      : g(g) {}
   optional<int> winding(P<T> p) {
     int n = g.size(), res = 0;
     for (int i = 0; i < n; i += 1) {
       auto a = g[i], b = g[(i + 1) % n];
       L l(a, b);
-      if (l.contains(p)) { return {}; }
-      if (sign(l.v().y) < 0 and l.left(p) >= 0) { continue; }
-      if (sign(l.v().y) == 0) { continue; }
-      if (sign(l.v().y) > 0 and l.left(p) <= 0) { continue; }
-      if (sign(a.y - p.y) < 0 and sign(b.y - p.y) >= 0) { res += 1; }
-      if (sign(a.y - p.y) >= 0 and sign(b.y - p.y) < 0) { res -= 1; }
+      if (l.contains(p)) {
+        return {};
+      }
+      if (sign(l.v().y) < 0 and l.left(p) >= 0) {
+        continue;
+      }
+      if (sign(l.v().y) == 0) {
+        continue;
+      }
+      if (sign(l.v().y) > 0 and l.left(p) <= 0) {
+        continue;
+      }
+      if (sign(a.y - p.y) < 0 and sign(b.y - p.y) >= 0) {
+        res += 1;
+      }
+      if (sign(a.y - p.y) >= 0 and sign(b.y - p.y) < 0) {
+        res -= 1;
+      }
     }
     return res;
   }
@@ -150,16 +170,28 @@ struct G {
     return res;
   }
   optional<bool> contains(P<T> p) {
-    if (g[0] == p) { return {}; }
-    if (g.size() == 1) { return false; }
-    if (L(g[0], g[1]).contains(p)) { return {}; }
-    if (L(g[0], g[1]).left(p) <= 0) { return false; }
-    if (L(g[0], g.back()).left(p) > 0) { return false; }
+    if (g[0] == p) {
+      return {};
+    }
+    if (g.size() == 1) {
+      return false;
+    }
+    if (L(g[0], g[1]).contains(p)) {
+      return {};
+    }
+    if (L(g[0], g[1]).left(p) <= 0) {
+      return false;
+    }
+    if (L(g[0], g.back()).left(p) > 0) {
+      return false;
+    }
     int i = *ranges::partition_point(views::iota(2, ssize(g)), [&](int i) {
       return sign((p - g[0]).cross(g[i] - g[0])) <= 0;
     });
     int s = L(g[i - 1], g[i]).left(p);
-    if (s == 0) { return {}; }
+    if (s == 0) {
+      return {};
+    }
     return s > 0;
   }
   int most(const function<P<T>(P<T>)>& f) {
@@ -169,12 +201,18 @@ struct G {
     };
     P<T> f0 = f(g[0]);
     bool check0 = check(0);
-    if (not check0 and check(n - 1)) { return 0; }
+    if (not check0 and check(n - 1)) {
+      return 0;
+    }
     return *ranges::partition_point(views::iota(0, n), [&](int i) -> bool {
-      if (i == 0) { return true; }
+      if (i == 0) {
+        return true;
+      }
       bool checki = check(i);
       int t = sign(f0.cross(g[i] - g[0]));
-      if (i == 1 and checki == check0 and t == 0) { return true; }
+      if (i == 1 and checki == check0 and t == 0) {
+        return true;
+      }
       return checki ^ (checki == check0 and t <= 0);
     });
   }
@@ -216,7 +254,9 @@ vector<L<T>> half(vector<L<T>> ls, T bound) {
     while (q.size() > 1 and check(ls[i], q.back(), q.end()[-2])) {
       q.pop_back();
     }
-    while (q.size() > 1 and check(ls[i], q[0], q[1])) { q.pop_front(); }
+    while (q.size() > 1 and check(ls[i], q[0], q[1])) {
+      q.pop_front();
+    }
     if (not q.empty() and sign(q.back().v().cross(ls[i].v())) <= 0) {
       return {};
     }
@@ -225,7 +265,9 @@ vector<L<T>> half(vector<L<T>> ls, T bound) {
   while (q.size() > 1 and check(q[0], q.back(), q.end()[-2])) {
     q.pop_back();
   }
-  while (q.size() > 1 and check(q.back(), q[0], q[1])) { q.pop_front(); }
+  while (q.size() > 1 and check(q.back(), q[0], q[1])) {
+    q.pop_front();
+  }
   return vector<L<T>>(q.begin(), q.end());
 }
 
@@ -238,8 +280,12 @@ int main() {
     int m;
     cin >> m;
     vector<P<i64>> p(m);
-    for (auto& [x, y] : p) { cin >> x >> y; }
-    for (int j = 0; j < m; j += 1) { ls.push_back(L(p[j], p[(j + 1) % m])); }
+    for (auto& [x, y] : p) {
+      cin >> x >> y;
+    }
+    for (int j = 0; j < m; j += 1) {
+      ls.push_back(L(p[j], p[(j + 1) % m]));
+    }
   }
   ls = half<i64>(ls, 1000 + 10);
   int m = ls.size();
@@ -251,6 +297,8 @@ int main() {
         P(a.a.x + (f64)a.v().x * x / y, a.a.y + (f64)a.v().y * x / y));
   }
   f64 ans = 0;
-  for (int i = 0; i < m; i += 1) { ans += p[i].cross(p[(i + 1) % m]); }
+  for (int i = 0; i < m; i += 1) {
+    ans += p[i].cross(p[(i + 1) % m]);
+  }
   cout << fixed << setprecision(3) << ans / 2;
 }

@@ -15,9 +15,13 @@ minimum_perfect_matching_on_bipartite_graph(const vector<vector<i64>>& w) {
   vector<int> cols(n);
   iota(cols.begin(), cols.end(), 0);
   for (int r = 0; r < n; r += 1) {
-    if (rm[r] != -1) { continue; }
+    if (rm[r] != -1) {
+      continue;
+    }
     vector<i64> d(n);
-    for (int c = 0; c < n; c += 1) { d[c] = resid(r, c); }
+    for (int c = 0; c < n; c += 1) {
+      d[c] = resid(r, c);
+    }
     vector<int> pre(n, r);
     int scan = 0, label = 0, last = 0, col = -1;
     [&]() {
@@ -72,6 +76,8 @@ minimum_perfect_matching_on_bipartite_graph(const vector<vector<i64>>& w) {
     }
   }
   i64 res = 0;
-  for (int i = 0; i < n; i += 1) { res += w[i][rm[i]]; }
+  for (int i = 0; i < n; i += 1) {
+    res += w[i][rm[i]];
+  }
   return {res, rm};
 }

@@ -1,15 +1,23 @@
-template <class T, class E, class REV, class OP> struct Node {
+template <class T, class E, class REV, class OP>
+struct Node {
   T t, st;
   bool reversed;
   Node* par;
   array<Node*, 2> ch;
-  Node(T t = E()()) : t(t), st(t), reversed(false), par(nullptr) {
+  Node(T t = E()())
+      : t(t), st(t), reversed(false), par(nullptr) {
     ch.fill(nullptr);
   }
   int get_s() {
-    if (par == nullptr) { return -1; }
-    if (par->ch[0] == this) { return 0; }
-    if (par->ch[1] == this) { return 1; }
+    if (par == nullptr) {
+      return -1;
+    }
+    if (par->ch[0] == this) {
+      return 0;
+    }
+    if (par->ch[1] == this) {
+      return 1;
+    }
     return -1;
   }
   void push_up() {
@@ -22,13 +30,19 @@ template <class T, class E, class REV, class OP> struct Node {
   void push_down() {
     if (reversed) {
       swap(ch[0], ch[1]);
-      if (ch[0]) { ch[0]->reverse(); }
-      if (ch[1]) { ch[1]->reverse(); }
+      if (ch[0]) {
+        ch[0]->reverse();
+      }
+      if (ch[1]) {
+        ch[1]->reverse();
+      }
       reversed = false;
     }
   }
   void attach(int s, Node* u) {
-    if ((ch[s] = u)) { u->par = this; }
+    if ((ch[s] = u)) {
+      u->par = this;
+    }
     push_up();
   }
   void rotate() {
@@ -38,7 +52,9 @@ template <class T, class E, class REV, class OP> struct Node {
     int ps = p->get_s();
     p->attach(s, ch[s ^ 1]);
     attach(s ^ 1, p);
-    if (~ps) { pp->attach(ps, this); }
+    if (~ps) {
+      pp->attach(ps, this);
+    }
     par = pp;
   }
   void splay() {

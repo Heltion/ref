@@ -1,4 +1,5 @@
-template <int step> f64 golden_search(function<f64(f64)> f, f64 l, f64 r) {
+template <int step>
+f64 golden_search(function<f64(f64)> f, f64 l, f64 r) {
   f64 ml = (numbers::phi - 1) * l + (2 - numbers::phi) * r;
   f64 mr = l + r - ml;
   f64 fml = f(ml), fmr = f(mr);

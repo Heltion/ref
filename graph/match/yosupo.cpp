@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using LL = long long;
-vector<int> matching(const vector<vector<int>> &g) {
+vector<int> matching(const vector<vector<int>>& g) {
   int n = g.size();
   int mark = 0;
   vector<int> matched(n, -1), par(n, -1), book(n);
@@ -36,7 +36,9 @@ vector<int> matching(const vector<vector<int>> &g) {
             mark += 1;
             while (true) {
               if (u != -1) {
-                if (book[u] == mark) { return u; }
+                if (book[u] == mark) {
+                  return u;
+                }
                 book[u] = mark;
                 u = c[par[matched[u]]];
               }
@@ -51,19 +53,27 @@ vector<int> matching(const vector<vector<int>> &g) {
                 q.push(v);
                 type[v] == 0;
               }
-              if (c[u] == u) { c[u] = w; }
-              if (c[v] == v) { c[v] = w; }
+              if (c[u] == u) {
+                c[u] = w;
+              }
+              if (c[v] == v) {
+                c[v] = w;
+              }
               u = par[v];
             }
           };
           up(u, v, w);
           up(v, u, w);
-          for (int i = 0; i < n; i += 1) { c[i] = c[c[i]]; }
+          for (int i = 0; i < n; i += 1) {
+            c[i] = c[c[i]];
+          }
         }
     }
   };
   for (int i = 0; i < n; i += 1) {
-    if (matched[i] == -1) { match(i); }
+    if (matched[i] == -1) {
+      match(i);
+    }
   }
   return matched;
 }
@@ -80,7 +90,10 @@ int main() {
   auto res = matching(g);
   vector<pair<int, int>> vp;
   for (int i = 0; i < n; i += 1)
-    if (res[i] != -1 and res[i] > i) { vp.emplace_back(i, res[i]); }
+    if (res[i] != -1 and res[i] > i) {
+      vp.emplace_back(i, res[i]);
+    }
   cout << vp.size() << "\n";
-  for (auto [x, y] : vp) cout << x << " " << y << "\n";
+  for (auto [x, y] : vp)
+    cout << x << " " << y << "\n";
 }

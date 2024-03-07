@@ -19,7 +19,9 @@ struct NimProduct {
     for (int i = 0; i < 64 and x >> i; i += 1) {
       if ((x >> i) % 2) {
         for (int j = 0; j < 64 and y >> j; j += 1) {
-          if ((y >> j) % 2) { res ^= mem[i][j]; }
+          if ((y >> j) % 2) {
+            res ^= mem[i][j];
+          }
         }
       }
     }

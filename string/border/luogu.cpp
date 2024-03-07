@@ -3,12 +3,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> fborder(const string &s) {
+vector<int> fborder(const string& s) {
   int n = s.size();
   vector<int> res(n);
   for (int i = 1; i < n; i += 1) {
-    int &j = res[i] = res[i - 1];
-    while (j and s[i] != s[j]) { j = res[j - 1]; }
+    int& j = res[i] = res[i - 1];
+    while (j and s[i] != s[j]) {
+      j = res[j - 1];
+    }
     j += s[i] == s[j];
   }
   return res;
@@ -16,7 +18,7 @@ vector<int> fborder(const string &s) {
 
 struct SparseTable {
   vector<vector<int>> table;
-  void init(const vector<int> &a) {
+  void init(const vector<int>& a) {
     int n = a.size(), h = bit_width(a.size());
     table.resize(h);
     table[0] = a;
@@ -36,7 +38,7 @@ struct SparseTable {
 struct LeastCommonAncestor {
   SparseTable st;
   vector<int> p, time, a, par;
-  LeastCommonAncestor(const vector<vector<int>> &g, int root) {
+  LeastCommonAncestor(const vector<vector<int>>& g, int root) {
     int n = g.size();
     time.resize(n, -1);
     par.resize(n, -1);
@@ -52,12 +54,18 @@ struct LeastCommonAncestor {
     };
     dfs(root);
     a.resize(n);
-    for (int i = 1; i < n; i += 1) { a[i] = time[par[p[i]]]; }
+    for (int i = 1; i < n; i += 1) {
+      a[i] = time[par[p[i]]];
+    }
     st.init(a);
   }
   int query(int u, int v) {
-    if (u == v) { return u; }
-    if (time[u] > time[v]) { swap(u, v); }
+    if (u == v) {
+      return u;
+    }
+    if (time[u] > time[v]) {
+      swap(u, v);
+    }
     return p[st.query(time[u] + 1, time[v] + 1)];
   }
 };

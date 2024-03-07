@@ -1,10 +1,14 @@
 u64 min_of_mod(u64 n, u64 m, u64 a, u64 b, u64 c = 1, u64 p = 1, u64 q = 1) {
-  if (a == 0) { return b; }
+  if (a == 0) {
+    return b;
+  }
   if (c % 2) {
     if (b >= a) {
       u64 t = (m - b + a - 1) / a;
       u64 d = (t - 1) * p + q;
-      if (n <= d) { return b; }
+      if (n <= d) {
+        return b;
+      }
       n -= d;
       b += a * t - m;
     }
@@ -13,7 +17,9 @@ u64 min_of_mod(u64 n, u64 m, u64 a, u64 b, u64 c = 1, u64 p = 1, u64 q = 1) {
     if (b < m - a) {
       u64 t = (m - b - 1) / a;
       u64 d = t * p;
-      if (n <= d) { return (n - 1) / p * a + b; }
+      if (n <= d) {
+        return (n - 1) / p * a + b;
+      }
       n -= d;
       b += a * t;
     }

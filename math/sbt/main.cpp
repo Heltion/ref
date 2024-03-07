@@ -1,7 +1,8 @@
 struct Node {
   int a, b;
   vector<pair<int, char>> p;
-  Node(int a, int b) : a(a), b(b) {
+  Node(int a, int b)
+      : a(a), b(b) {
     // gcd(a, b) == 1
     while (a != 1 or b != 1) {
       if (a > b) {

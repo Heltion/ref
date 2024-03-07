@@ -1,10 +1,14 @@
 vector<i64> pollard_rho(i64 n) {
   static mt19937_64 mt;
   uniform_int_distribution uid(i64(0), n);
-  if (n == 1) { return {}; }
+  if (n == 1) {
+    return {};
+  }
   vector<i64> res;
   function<void(i64)> rho = [&](i64 n) {
-    if (miller_rabin(n)) { return res.push_back(n); }
+    if (miller_rabin(n)) {
+      return res.push_back(n);
+    }
     i64 d = n;
     while (d == n) {
       d = 1;
@@ -15,7 +19,9 @@ vector<i64> pollard_rho(i64 n) {
           s = (i128)s * abs(x - y) % n;
           if (not(i % 127) or i == k) {
             d = gcd(s, n);
-            if (d != 1) { break; }
+            if (d != 1) {
+              break;
+            }
           }
         }
       }

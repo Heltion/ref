@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> bcc(const vector<vector<int>> &g) {
+vector<vector<int>> bcc(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> pos(n, -1), stack;
   vector<vector<int>> res;
@@ -11,7 +11,9 @@ vector<vector<int>> bcc(const vector<vector<int>> &g) {
     stack.push_back(u);
     for (int v : g[u]) {
       if (~pos[v]) {
-        if (v != p or pc++) { low = min(low, pos[v]); }
+        if (v != p or pc++) {
+          low = min(low, pos[v]);
+        }
       } else {
         low = min(low, dfs(v, u));
       }
@@ -23,7 +25,9 @@ vector<vector<int>> bcc(const vector<vector<int>> &g) {
     return low;
   };
   for (int i = 0; i < n; i += 1) {
-    if (pos[i] == -1) { dfs(i, -1); }
+    if (pos[i] == -1) {
+      dfs(i, -1);
+    }
   }
   return res;
 }
@@ -40,9 +44,11 @@ int main() {
   }
   auto bccs = bcc(g);
   cout << bccs.size() << "\n";
-  for (const auto &bcc : bccs) {
+  for (const auto& bcc : bccs) {
     cout << bcc.size();
-    for (int u : bcc) { cout << " " << u; }
+    for (int u : bcc) {
+      cout << " " << u;
+    }
     cout << "\n";
   }
 }

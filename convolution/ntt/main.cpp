@@ -5,7 +5,9 @@ void fft(vector<i64>& a, bool inverse) {
     r[i] = r[i / 2] / 2 | (i % 2 ? n / 2 : 0);
   }
   for (int i = 0; i < n; i += 1) {
-    if (i < r[i]) { swap(a[i], a[r[i]]); }
+    if (i < r[i]) {
+      swap(a[i], a[r[i]]);
+    }
   }
   for (int m = 1; m < n; m *= 2) {
     i64 wn = power(inverse ? power(g, mod - 2) : g, (mod - 1) / m / 2);
@@ -19,6 +21,8 @@ void fft(vector<i64>& a, bool inverse) {
   }
   if (inverse) {
     i64 inv = power(n, mod - 2);
-    for (auto& ai : a) { ai = ai * inv % mod; }
+    for (auto& ai : a) {
+      ai = ai * inv % mod;
+    }
   }
 }

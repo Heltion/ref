@@ -1,5 +1,5 @@
-vector<vector<int>>
-two_vertex_connected_components(const vector<vector<int>> &g) {
+vector<vector<int>> two_vertex_connected_components(
+    const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> pos(n, -1), stack;
   vector<vector<int>> res;

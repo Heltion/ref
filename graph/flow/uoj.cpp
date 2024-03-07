@@ -9,9 +9,12 @@ struct HighestLabelPreflowPush {
   int n;
   vector<vector<int>> g;
   vector<Edge> edges;
-  HighestLabelPreflowPush(int n) : n(n), g(n) {}
+  HighestLabelPreflowPush(int n)
+      : n(n), g(n) {}
   int add(int u, int v, i64 f) {
-    if (u == v) { return -1; }
+    if (u == v) {
+      return -1;
+    }
     int i = ssize(edges);
     edges.push_back({u, v, f});
     g[u].push_back(i);
@@ -25,7 +28,9 @@ struct HighestLabelPreflowPush {
     vector<vector<int>> pq(n * 2);
     auto push = [&](int i, i64 f) {
       auto [u, v, _] = edges[i];
-      if (not p[v] and f) { pq[h[v]].push_back(v); }
+      if (not p[v] and f) {
+        pq[h[v]].push_back(v);
+      }
       edges[i].f -= f;
       edges[i ^ 1].f += f;
       p[u] -= f;
@@ -34,10 +39,14 @@ struct HighestLabelPreflowPush {
     h[s] = n;
     count[0] = n - 1;
     p[t] = 1;
-    for (int i : g[s]) { push(i, edges[i].f); }
+    for (int i : g[s]) {
+      push(i, edges[i].f);
+    }
     for (int hi = 0;;) {
       while (pq[hi].empty()) {
-        if (not hi--) { return -p[s]; }
+        if (not hi--) {
+          return -p[s];
+        }
       }
       int u = pq[hi].back();
       pq[hi].pop_back();

@@ -5,7 +5,9 @@ void fft(vector<complex<f64>>& a, bool inverse) {
     r[i] = r[i / 2] / 2 | (i % 2 ? n / 2 : 0);
   }
   for (int i = 0; i < n; i += 1) {
-    if (i < r[i]) { swap(a[i], a[r[i]]); }
+    if (i < r[i]) {
+      swap(a[i], a[r[i]]);
+    }
   }
   for (int m = 1; m < n; m *= 2) {
     complex<f64> wn(exp((inverse ? 1.i : -1.i) * numbers::pi / (f64)m));
@@ -18,6 +20,8 @@ void fft(vector<complex<f64>>& a, bool inverse) {
     }
   }
   if (inverse) {
-    for (auto& ai : a) { ai /= n; }
+    for (auto& ai : a) {
+      ai /= n;
+    }
   }
 }

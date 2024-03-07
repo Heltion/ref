@@ -11,9 +11,10 @@ struct Node {
   u64 priority;
   int size, v;
   i64 sum;
-  Node(int v) : v(v), sum(v), priority(mt()), size(1) { l = r = nullptr; }
-  Node *update(Node *l, Node *r) {
-    Node *p = persistent ? new Node(*this) : this;
+  Node(int v)
+      : v(v), sum(v), priority(mt()), size(1) { l = r = nullptr; }
+  Node* update(Node* l, Node* r) {
+    Node* p = persistent ? new Node(*this) : this;
     p->l = l;
     p->r = r;
     p->size = (l ? l->size : 0) + 1 + (r ? r->size : 0);
@@ -22,8 +23,10 @@ struct Node {
   }
 };
 mt19937_64 Node::mt;
-pair<Node *, Node *> split_by_v(Node *p, int v) {
-  if (not p) { return {}; }
+pair<Node*, Node*> split_by_v(Node* p, int v) {
+  if (not p) {
+    return {};
+  }
   if (p->v < v) {
     auto [l, r] = split_by_v(p->r, v);
     return {p->update(p->l, l), r};
@@ -31,8 +34,10 @@ pair<Node *, Node *> split_by_v(Node *p, int v) {
   auto [l, r] = split_by_v(p->l, v);
   return {l, p->update(r, p->r)};
 }
-pair<Node *, Node *> split_by_size(Node *p, int size) {
-  if (not p) { return {}; }
+pair<Node*, Node*> split_by_size(Node* p, int size) {
+  if (not p) {
+    return {};
+  }
   int l_size = p->l ? p->l->size : 0;
   if (l_size < size) {
     auto [l, r] = split_by_size(p->r, size - l_size - 1);
@@ -41,9 +46,13 @@ pair<Node *, Node *> split_by_size(Node *p, int size) {
   auto [l, r] = split_by_size(p->l, size);
   return {l, p->update(r, p->r)};
 }
-Node *merge(Node *l, Node *r) {
-  if (not l or not r) { return l ?: r; }
-  if (l->priority < r->priority) { return r->update(merge(l, r->l), r->r); }
+Node* merge(Node* l, Node* r) {
+  if (not l or not r) {
+    return l ?: r;
+  }
+  if (l->priority < r->priority) {
+    return r->update(merge(l, r->l), r->r);
+  }
   return l->update(l->l, merge(l->r, r));
 }
 int main() {
@@ -51,13 +60,15 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<Node *> t(n + 1), rt(n + 1);
+  vector<Node*> t(n + 1), rt(n + 1);
   i64 last_ans = 0;
   for (int i = 1; i <= n; i += 1) {
     int v, opt;
     i64 a, b;
     cin >> v >> opt >> a;
-    if (opt != 2) { cin >> b; }
+    if (opt != 2) {
+      cin >> b;
+    }
     a ^= last_ans;
     b ^= last_ans;
     if (opt == 1) {

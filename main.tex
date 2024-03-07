@@ -3,7 +3,7 @@
 \usepackage{listings}
 \usepackage{geometry}
 \usepackage[T1]{fontenc}
-\usepackage{color}
+\usepackage{color} 
 \usepackage[hidelinks]{hyperref}
 \usepackage{multicol}
 \usepackage{float}
@@ -23,8 +23,7 @@
     frame        = single,
     numbers      = left,
     numberstyle   = \scriptsize,
-    breaklines   = false,
-    commentstyle = \color{red}
+    breaklines   = true
 }
 \pagestyle{plain}
 \setlength\columnsep{0.8cm}
@@ -47,6 +46,7 @@
     \lstinputlisting{misc/debug.h}
     \subsection{Template}
     \lstinputlisting{misc/template.cpp}
+    \subsection{Clang-foramt}
 
     \section{Graph}
     \subsection{Connected Components}

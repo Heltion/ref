@@ -3,21 +3,24 @@ using namespace std;
 
 struct DisjointSetUnion {
   vector<int> dsu;
-  DisjointSetUnion(int n) : dsu(n, -1) {}
+  DisjointSetUnion(int n)
+      : dsu(n, -1) {}
   int find(int u) { return dsu[u] < 0 ? u : dsu[u] = find(dsu[u]); }
   void merge(int u, int v) {
     u = find(u);
     v = find(v);
     if (u != v) {
-      if (dsu[u] > dsu[v]) { swap(u, v); }
+      if (dsu[u] > dsu[v]) {
+        swap(u, v);
+      }
       dsu[u] += dsu[v];
       dsu[v] = u;
     }
   }
 };
 
-vector<vector<int>>
-three_edge_connected_components(const vector<vector<int>> &g) {
+vector<vector<int>> three_edge_connected_components(
+    const vector<vector<int>>& g) {
   int n = g.size(), dft = -1;
   vector<int> pre(n, -1), post(n), path(n, -1), low(n), deg(n);
   DisjointSetUnion dsu(n);
@@ -32,7 +35,7 @@ three_edge_connected_components(const vector<vector<int>> &g) {
             low[u] = min(low[u], pre[v]);
           } else {
             deg[u] -= 1;
-            for (int &p = path[u];
+            for (int& p = path[u];
                  p != -1 and pre[p] <= pre[v] and pre[v] <= post[p];) {
               dsu.merge(u, p);
               deg[u] += deg[p];
@@ -45,7 +48,9 @@ three_edge_connected_components(const vector<vector<int>> &g) {
             low[u] = min(low[u], low[v]);
             deg[u] += deg[v];
           } else {
-            if (deg[v] == 0) { v = path[v]; }
+            if (deg[v] == 0) {
+              v = path[v];
+            }
             if (low[u] > low[v]) {
               low[u] = min(low[u], low[v]);
               swap(v, path[u]);
@@ -61,13 +66,19 @@ three_edge_connected_components(const vector<vector<int>> &g) {
     post[u] = dft;
   };
   for (int i = 0; i < n; i += 1) {
-    if (pre[i] == -1) { dfs(i, -1); }
+    if (pre[i] == -1) {
+      dfs(i, -1);
+    }
   }
   vector<vector<int>> _res(n);
-  for (int i = 0; i < n; i += 1) { _res[dsu.find(i)].push_back(i); }
+  for (int i = 0; i < n; i += 1) {
+    _res[dsu.find(i)].push_back(i);
+  }
   vector<vector<int>> res;
-  for (auto &res_i : _res) {
-    if (not res_i.empty()) { res.emplace_back(move(res_i)); }
+  for (auto& res_i : _res) {
+    if (not res_i.empty()) {
+      res.emplace_back(move(res_i));
+    }
   }
   return res;
 }
@@ -84,9 +95,11 @@ int main() {
   }
   auto tcc = three_edge_connected_components(g);
   cout << tcc.size() << "\n";
-  for (const auto &cc : tcc) {
+  for (const auto& cc : tcc) {
     cout << cc.size();
-    for (int u : cc) { cout << " " << u; }
+    for (int u : cc) {
+      cout << " " << u;
+    }
     cout << "\n";
   }
 }

@@ -4,7 +4,8 @@ using i64 = int64_t;
 struct Node {
   int a, b;
   vector<pair<int, char>> p;
-  Node(int a, int b) : a(a), b(b) {
+  Node(int a, int b)
+      : a(a), b(b) {
     // gcd(a, b) == 1
     while (a != 1 or b != 1) {
       if (a > b) {
@@ -40,7 +41,9 @@ int main() {
       int n;
       cin >> n;
       vector<pair<int, char>> p(n);
-      for (auto& [c, d] : p) { cin >> d >> c; }
+      for (auto& [c, d] : p) {
+        cin >> d >> c;
+      }
       Node node(p);
       cout << node.a << " " << node.b << "\n";
     } else if (s == "ENCODE_PATH") {
@@ -48,7 +51,9 @@ int main() {
       cin >> a >> b;
       Node node(a, b);
       cout << node.p.size() << " ";
-      for (auto [c, d] : node.p) { cout << d << " " << c << " "; }
+      for (auto [c, d] : node.p) {
+        cout << d << " " << c << " ";
+      }
       cout << "\n";
     } else if (s == "LCA") {
       int a0, b0, a1, b1;
@@ -73,7 +78,9 @@ int main() {
       cin >> k >> a >> b;
       Node node(a, b);
       int depth = 0;
-      for (auto [c, d] : node.p) { depth += c; }
+      for (auto [c, d] : node.p) {
+        depth += c;
+      }
       if (k > depth) {
         cout << "-1\n";
         continue;

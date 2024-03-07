@@ -1,15 +1,19 @@
 struct Node {
   int link, len;
   array<int, sigma> next;
-  Node() : link(-1), len(0) { next.fill(-1); }
+  Node()
+      : link(-1), len(0) { next.fill(-1); }
 };
 struct SuffixAutomaton : vector<Node> {
-  SuffixAutomaton() : vector<Node>(1) {}
+  SuffixAutomaton()
+      : vector<Node>(1) {}
   int extend(int p, int c) {
     if (~at(p).next[c]) {
       // For online multiple strings.
       int q = at(p).next[c];
-      if (at(p).len + 1 == at(q).len) { return q; }
+      if (at(p).len + 1 == at(q).len) {
+        return q;
+      }
       int clone = size();
       push_back(at(q));
       back().len = at(p).len + 1;
