@@ -4,8 +4,7 @@ struct Mv {
   bool less;
   i64 def() { return less ? inf : -inf; }
   i64 mmv(i64 x, i64 y) { return less ? min(x, y) : max(x, y); }
-  Mv(i64 x, bool less)
-      : less(less) {
+  Mv(i64 x, bool less) : less(less) {
     mv = x;
     smv = tmv = def();
     cmv = 1;
@@ -29,10 +28,7 @@ struct Node {
   Mv mn, mx;
   i64 sum, tsum;
   Node *ls, *rs;
-  Node(i64 x = 0)
-      : sum(x), tsum(0), mn(x, true), mx(x, false) {
-    ls = rs = nullptr;
-  }
+  Node(i64 x = 0) : sum(x), tsum(0), mn(x, true), mx(x, false) { ls = rs = nullptr; }
   void up() {
     sum = ls->sum + rs->sum;
     mx.up(ls->mx, rs->mx);

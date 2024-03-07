@@ -12,8 +12,7 @@ vector<i64> pollard_rho(i64 n) {
     i64 d = n;
     while (d == n) {
       d = 1;
-      for (i64 k = 1, y = 0, x = 0, s = 1, c = uid(mt); d == 1;
-           k <<= 1, y = x, s = 1) {
+      for (i64 k = 1, y = 0, x = 0, s = 1, c = uid(mt); d == 1; k <<= 1, y = x, s = 1) {
         for (int i = 1; i <= k; i += 1) {
           x = ((i128)x * x + c) % n;
           s = (i128)s * abs(x - y) % n;

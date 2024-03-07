@@ -2,8 +2,7 @@ struct Node {
   int v, h;
   i64 w;
   Node *l, *r;
-  Node(int v, i64 w)
-      : v(v), w(w), h(1) { l = r = nullptr; }
+  Node(int v, i64 w) : v(v), w(w), h(1) { l = r = nullptr; }
 };
 Node* merge(Node* u, Node* v) {
   if (not u or not v) {
@@ -25,11 +24,7 @@ struct Edge {
 };
 template <typename T>
 using minimum_heap = priority_queue<T, vector<T>, greater<T>>;
-vector<i64> k_shortest_paths(int n,
-                             const vector<Edge>& edges,
-                             int s,
-                             int t,
-                             int k) {
+vector<i64> k_shortest_paths(int n, const vector<Edge>& edges, int s, int t, int k) {
   vector<vector<int>> g(n);
   for (int i = 0; i < ssize(edges); i += 1) {
     g[edges[i].u].push_back(i);

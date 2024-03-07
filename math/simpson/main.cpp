@@ -10,6 +10,5 @@ f64 adaptive_simpson(const function<f64(f64)>& f, f64 l, f64 r, f64 eps) {
   if (abs(d) < 15 * eps) {
     return (sl + sr) + d / 15;
   }
-  return adaptive_simpson(f, l, m, eps / 2) +
-         adaptive_simpson(f, m, r, eps / 2);
+  return adaptive_simpson(f, l, m, eps / 2) + adaptive_simpson(f, m, r, eps / 2);
 }

@@ -4,12 +4,10 @@ constexpr int sigma = 26;
 struct Node {
   int link;
   array<int, sigma> next;
-  Node()
-      : link(0) { next.fill(0); }
+  Node() : link(0) { next.fill(0); }
 };
 struct AhoCorasick : vector<Node> {
-  AhoCorasick()
-      : vector<Node>(1) {}
+  AhoCorasick() : vector<Node>(1) {}
   int add(const string& s, char first = 'a') {
     int p = 0;
     for (char si : s) {

@@ -4,10 +4,7 @@ struct Node {
   bool reversed;
   Node* par;
   array<Node*, 2> ch;
-  Node(T t = E()())
-      : t(t), st(t), reversed(false), par(nullptr) {
-    ch.fill(nullptr);
-  }
+  Node(T t = E()()) : t(t), st(t), reversed(false), par(nullptr) { ch.fill(nullptr); }
   int get_s() {
     if (par == nullptr) {
       return -1;
@@ -20,9 +17,7 @@ struct Node {
     }
     return -1;
   }
-  void push_up() {
-    st = OP()(ch[0] ? ch[0]->st : E()(), OP()(t, ch[1] ? ch[1]->st : E()()));
-  }
+  void push_up() { st = OP()(ch[0] ? ch[0]->st : E()(), OP()(t, ch[1] ? ch[1]->st : E()())); }
   void reverse() {
     reversed ^= 1;
     st = REV()(st);

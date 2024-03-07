@@ -60,8 +60,7 @@ vector<i64> pollard_rho(i64 n) {
     i64 d = n;
     while (d == n) {
       d = 1;
-      for (i64 k = 1, y = 0, x = 0, s = 1, c = uid(mt); d == 1;
-           k <<= 1, y = x, s = 1) {
+      for (i64 k = 1, y = 0, x = 0, s = 1, c = uid(mt); d == 1; k <<= 1, y = x, s = 1) {
         for (int i = 1; i <= k; i += 1) {
           x = ((i128)x * x + c) % n;
           s = (i128)s * abs(x - y) % n;
@@ -126,11 +125,7 @@ int main() {
     for (i64 p : pd) {
       mp[p] += 1;
     }
-    if (mp.size() >= 3 or
-        (mp.size() == 2 and
-         (mp.begin()->first != 2 or mp.begin()->second != 1)) or
-        (mp.size() == 1 and mp.begin()->first == 2 and
-         mp.begin()->second > 2)) {
+    if (mp.size() >= 3 or (mp.size() == 2 and (mp.begin()->first != 2 or mp.begin()->second != 1)) or (mp.size() == 1 and mp.begin()->first == 2 and mp.begin()->second > 2)) {
       cout << "0\n\n";
       continue;
     }

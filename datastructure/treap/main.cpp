@@ -6,8 +6,7 @@ struct Node {
   int size, v;
   i64 sum;
   Node(const Node& other) { memcpy(this, &other, sizeof(Node)); }
-  Node(int v)
-      : v(v), sum(v), priority(mt()), size(1) { l = r = nullptr; }
+  Node(int v) : v(v), sum(v), priority(mt()), size(1) { l = r = nullptr; }
   Node* update(Node* l, Node* r) {
     Node* p = persistent ? new Node(*this) : this;
     p->l = l;

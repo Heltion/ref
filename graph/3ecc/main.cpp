@@ -1,5 +1,4 @@
-vector<vector<int>> three_edge_connected_components(
-    const vector<vector<int>>& g) {
+vector<vector<int>> three_edge_connected_components(const vector<vector<int>>& g) {
   int n = g.size(), dft = -1;
   vector<int> pre(n, -1), post(n), path(n, -1), low(n), deg(n);
   DisjointSetUnion dsu(n);
@@ -14,8 +13,7 @@ vector<vector<int>> three_edge_connected_components(
             low[u] = min(low[u], pre[v]);
           } else {
             deg[u] -= 1;
-            for (int& p = path[u];
-                 p != -1 and pre[p] <= pre[v] and pre[v] <= post[p];) {
+            for (int& p = path[u]; p != -1 and pre[p] <= pre[v] and pre[v] <= post[p];) {
               dsu.merge(u, p);
               deg[u] += deg[p];
               p = path[p];

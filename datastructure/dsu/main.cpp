@@ -1,7 +1,6 @@
 struct DisjointSetUnion {
   vector<int> dsu;
-  DisjointSetUnion(int n)
-      : dsu(n, -1) {}
+  DisjointSetUnion(int n) : dsu(n, -1) {}
   int find(int u) { return dsu[u] < 0 ? u : dsu[u] = find(dsu[u]); }
   void merge(int u, int v) {
     u = find(u);
@@ -18,8 +17,7 @@ struct DisjointSetUnion {
 struct RollbackDisjointSetUnion {
   vector<pair<int, int>> stack;
   vector<int> dsu;
-  RollbackDisjointSetUnion(int n)
-      : dsu(n, -1) {}
+  RollbackDisjointSetUnion(int n) : dsu(n, -1) {}
   int find(int u) { return dsu[u] < 0 ? u : find(dsu[u]); }
   int time() { return ssize(stack); }
   bool merge(int u, int v) {

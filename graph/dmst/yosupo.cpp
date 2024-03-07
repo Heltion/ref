@@ -9,8 +9,7 @@ struct Edge {
 struct RollbackDisjointSetUnion {
   vector<pair<int, int>> stack;
   vector<int> dsu;
-  RollbackDisjointSetUnion(int n)
-      : dsu(n, -1) {}
+  RollbackDisjointSetUnion(int n) : dsu(n, -1) {}
   int find(int u) { return dsu[u] < 0 ? u : find(dsu[u]); }
   int time() { return ssize(stack); }
   bool merge(int u, int v) {
@@ -38,8 +37,7 @@ struct Node {
   Edge e;
   int d;
   Node *l, *r;
-  Node(Edge e)
-      : e(e), d(0) { l = r = nullptr; }
+  Node(Edge e) : e(e), d(0) { l = r = nullptr; }
   void add(int v) {
     e.w += v;
     d += v;
@@ -70,8 +68,7 @@ void pop(Node*& u) {
   u->push();
   u = merge(u->l, u->r);
 }
-pair<i64, vector<int>>
-directed_minimum_spanning_tree(int n, const vector<Edge>& edges, int s) {
+pair<i64, vector<int>> directed_minimum_spanning_tree(int n, const vector<Edge>& edges, int s) {
   i64 ans = 0;
   vector<Node*> heap(n), edge(n);
   RollbackDisjointSetUnion dsu(n), rbdsu(n);

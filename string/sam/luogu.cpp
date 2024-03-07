@@ -4,12 +4,10 @@ constexpr int sigma = 26;
 struct Node {
   int link, len;
   array<int, sigma> next;
-  Node()
-      : link(-1), len(0) { next.fill(-1); }
+  Node() : link(-1), len(0) { next.fill(-1); }
 };
 struct SuffixAutomaton : vector<Node> {
-  SuffixAutomaton()
-      : vector<Node>(1) {}
+  SuffixAutomaton() : vector<Node>(1) {}
   int extend(int p, int c) {
     if (~at(p).next[c]) {
       // For online multiple strings.
@@ -73,6 +71,5 @@ int main() {
   for (int i = 1; i < sam.size(); i += 1) {
     ans += sam[i].len - sam[sam[i].link].len;
   }
-  cout << ans << "\n"
-       << sam.size() << "\n";
+  cout << ans << "\n" << sam.size() << "\n";
 }

@@ -9,11 +9,9 @@ struct Segments {
   };
   i64 tl, tr;
   Node* root;
-  Segments(i64 tl, i64 tr)
-      : tl(tl), tr(tr), root(nullptr) {}
+  Segments(i64 tl, i64 tr) : tl(tl), tr(tr), root(nullptr) {}
   void add(i64 l, i64 r, i64 k, i64 b) {
-    function<void(Node*&, i64, i64, Segment)> rec = [&](Node*& p, i64 tl,
-                                                        i64 tr, Segment s) {
+    function<void(Node*&, i64, i64, Segment)> rec = [&](Node*& p, i64 tl, i64 tr, Segment s) {
       if (p == nullptr) {
         p = new Node();
       }

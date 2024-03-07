@@ -2,9 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-optional<vector<vector<pair<int, bool>>>> undirected_walks(
-    int n,
-    const vector<pair<int, int>>& edges) {
+optional<vector<vector<pair<int, bool>>>> undirected_walks(int n, const vector<pair<int, int>>& edges) {
   int m = ssize(edges);
   vector<vector<pair<int, bool>>> res;
   if (not m) {
@@ -45,9 +43,7 @@ optional<vector<vector<pair<int, bool>>>> undirected_walks(
   }
   return res;
 }
-optional<vector<vector<int>>> directed_walks(
-    int n,
-    const vector<pair<int, int>>& edges) {
+optional<vector<vector<int>>> directed_walks(int n, const vector<pair<int, int>>& edges) {
   int m = ssize(edges);
   vector<vector<int>> res;
   if (not m) {

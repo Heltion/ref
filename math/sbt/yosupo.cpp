@@ -4,8 +4,7 @@ using i64 = int64_t;
 struct Node {
   int a, b;
   vector<pair<int, char>> p;
-  Node(int a, int b)
-      : a(a), b(b) {
+  Node(int a, int b) : a(a), b(b) {
     // gcd(a, b) == 1
     while (a != 1 or b != 1) {
       if (a > b) {
@@ -19,8 +18,7 @@ struct Node {
       }
     }
   }
-  Node(vector<pair<int, char>> p, int _a = 1, int _b = 1)
-      : p(p), a(_a), b(_b) {
+  Node(vector<pair<int, char>> p, int _a = 1, int _b = 1) : p(p), a(_a), b(_b) {
     for (auto [c, d] : p | views::reverse) {
       if (d == 'R') {
         a += c * b;
@@ -65,8 +63,7 @@ int main() {
           p.emplace_back(node0.p[i]);
         } else {
           if (node0.p[i].second == node1.p[i].second) {
-            p.emplace_back(min(node0.p[i].first, node1.p[i].first),
-                           node0.p[i].second);
+            p.emplace_back(min(node0.p[i].first, node1.p[i].first), node0.p[i].second);
           }
           break;
         }
@@ -107,8 +104,7 @@ int main() {
       cin >> a >> b;
       Node node(a, b);
       Node node0(node.p, 0, 1), node1(node.p, 1, 0);
-      cout << node0.a << " " << node0.b << " " << node1.a << " " << node1.b
-           << "\n";
+      cout << node0.a << " " << node0.b << " " << node1.a << " " << node1.b << "\n";
     }
   }
 }

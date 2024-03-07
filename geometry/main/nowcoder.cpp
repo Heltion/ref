@@ -14,8 +14,7 @@ int sign(T x) {
 template <typename T>
 struct P {
   T x, y;
-  explicit P(T x = 0, T y = 0)
-      : x(x), y(y) {}
+  explicit P(T x = 0, T y = 0) : x(x), y(y) {}
   P operator*(T k) { return P(x * k, y * k); }
   P operator+(P p) { return P(x + p.x, y + p.y); }
   P operator-(P p) { return P(x - p.x, y - p.y); }
@@ -43,11 +42,8 @@ pair<int, int> iota(int l, int r) {
 }
 }  // namespace views
 namespace ranges {
-void sort(vector<P<i64>>& p,
-          i64 cmp,
-          const function<pair<i64, i64>(P<i64>)>& proj) {
-  std::sort(p.begin(), p.end(),
-            [&](P<i64> a, P<i64> b) { return proj(a) < proj(b); });
+void sort(vector<P<i64>>& p, i64 cmp, const function<pair<i64, i64>(P<i64>)>& proj) {
+  std::sort(p.begin(), p.end(), [&](P<i64> a, P<i64> b) { return proj(a) < proj(b); });
   assert(not cmp);
 }
 template <typename T, typename F>
@@ -85,12 +81,9 @@ bool argument(P<T> lhs, P<T> rhs) {
 template <typename T>
 struct L {
   P<T> a, b;
-  explicit L(P<T> a = {}, P<T> b = {})
-      : a(a), b(b) {}
+  explicit L(P<T> a = {}, P<T> b = {}) : a(a), b(b) {}
   P<T> v() { return b - a; }
-  bool contains(P<T> p) {
-    return sign((p - a).cross(p - b)) == 0 and sign((p - a).dot(p - b)) <= 0;
-  }
+  bool contains(P<T> p) { return sign((p - a).cross(p - b)) == 0 and sign((p - a).dot(p - b)) <= 0; }
   int left(P<T> p) { return sign(v().cross(p - a)); }
   optional<pair<T, T>> intersection(L l) {
     auto y = v().cross(l.v());
@@ -104,10 +97,8 @@ struct L {
 template <typename T>
 struct G {
   vector<P<T>> g;
-  explicit G(int n)
-      : g(n) {}
-  explicit G(const vector<P<T>>& g)
-      : g(g) {}
+  explicit G(int n) : g(n) {}
+  explicit G(const vector<P<T>>& g) : g(g) {}
   optional<int> winding(P<T> p) {
     int n = g.size(), res = 0;
     for (int i = 0; i < n; i += 1) {
@@ -138,16 +129,14 @@ struct G {
     ranges::sort(g, {}, [&](P<T> p) { return pair(p.x, p.y); });
     vector<P<T>> h;
     for (auto p : g) {
-      while (ssize(h) >= 2 and
-             sign((h.back() - h.end()[-2]).cross(p - h.back())) <= 0) {
+      while (ssize(h) >= 2 and sign((h.back() - h.end()[-2]).cross(p - h.back())) <= 0) {
         h.pop_back();
       }
       h.push_back(p);
     }
     int m = h.size();
     for (auto p : g | views::reverse) {
-      while (ssize(h) > m and
-             sign((h.back() - h.end()[-2]).cross(p - h.back())) <= 0) {
+      while (ssize(h) > m and sign((h.back() - h.end()[-2]).cross(p - h.back())) <= 0) {
         h.pop_back();
       }
       h.push_back(p);
@@ -185,9 +174,7 @@ struct G {
     if (L(g[0], g.back()).left(p) > 0) {
       return false;
     }
-    int i = *ranges::partition_point(views::iota(2, ssize(g)), [&](int i) {
-      return sign((p - g[0]).cross(g[i] - g[0])) <= 0;
-    });
+    int i = *ranges::partition_point(views::iota(2, ssize(g)), [&](int i) { return sign((p - g[0]).cross(g[i] - g[0])) <= 0; });
     int s = L(g[i - 1], g[i]).left(p);
     if (s == 0) {
       return {};
@@ -196,9 +183,7 @@ struct G {
   }
   int most(const function<P<T>(P<T>)>& f) {
     int n = g.size();
-    auto check = [&](int i) {
-      return sign(f(g[i]).cross(g[(i + 1) % n] - g[i])) >= 0;
-    };
+    auto check = [&](int i) { return sign(f(g[i]).cross(g[(i + 1) % n] - g[i])) >= 0; };
     P<T> f0 = f(g[0]);
     bool check0 = check(0);
     if (not check0 and check(n - 1)) {
@@ -217,12 +202,10 @@ struct G {
     });
   }
   pair<int, int> tan(P<T> p) {
-    return {most([&](P<T> x) { return x - p; }),
-            most([&](P<T> x) { return p - x; })};
+    return {most([&](P<T> x) { return x - p; }), most([&](P<T> x) { return p - x; })};
   }
   pair<int, int> tan(L<T> l) {
-    return {most([&](P<T> _) { return l.v(); }),
-            most([&](P<T> _) { return -l.v(); })};
+    return {most([&](P<T> _) { return l.v(); }), most([&](P<T> _) { return -l.v(); })};
   }
 };
 
@@ -239,16 +222,14 @@ vector<L<T>> half(vector<L<T>> ls, T bound) {
   ls.emplace_back(P(bound, (T)0), P(bound, (T)1));
   ls.emplace_back(P((T)0, bound), P(-(T)1, bound));
   ranges::sort(ls, [&](L<T> lhs, L<T> rhs) {
-    if (sign(lhs.v().cross(rhs.v())) == 0 and
-        sign(lhs.v().dot(rhs.v())) >= 0) {
+    if (sign(lhs.v().cross(rhs.v())) == 0 and sign(lhs.v().dot(rhs.v())) >= 0) {
       return lhs.left(rhs.a) == -1;
     }
     return argument(lhs.v(), rhs.v());
   });
   deque<L<T>> q;
   for (int i = 0; i < ssize(ls); i += 1) {
-    if (i and sign(ls[i - 1].v().cross(ls[i].v())) == 0 and
-        sign(ls[i - 1].v().dot(ls[i].v())) == 1) {
+    if (i and sign(ls[i - 1].v().cross(ls[i].v())) == 0 and sign(ls[i - 1].v().dot(ls[i].v())) == 1) {
       continue;
     }
     while (q.size() > 1 and check(ls[i], q.back(), q.end()[-2])) {
@@ -293,8 +274,7 @@ int main() {
   for (int i = 0; i < m; i += 1) {
     auto a = ls[i], b = ls[(i + 1) % m];
     auto [x, y] = a.intersection(b).value();
-    p.push_back(
-        P(a.a.x + (f64)a.v().x * x / y, a.a.y + (f64)a.v().y * x / y));
+    p.push_back(P(a.a.x + (f64)a.v().x * x / y, a.a.y + (f64)a.v().y * x / y));
   }
   f64 ans = 0;
   for (int i = 0; i < m; i += 1) {

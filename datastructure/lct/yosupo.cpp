@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite"
+#define PROBLEM "https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite"
 #include <bits/stdc++.h>
 using namespace std;
 using i64 = int64_t;
@@ -14,10 +13,7 @@ struct Node {
   bool reversed;
   Node* par;
   array<Node*, 2> ch;
-  Node(T t = E()())
-      : t(t), st(t), reversed(false), par(nullptr) {
-    ch.fill(nullptr);
-  }
+  Node(T t = E()()) : t(t), st(t), reversed(false), par(nullptr) { ch.fill(nullptr); }
   int get_s() {
     if (par == nullptr) {
       return -1;
@@ -30,9 +26,7 @@ struct Node {
     }
     return -1;
   }
-  void push_up() {
-    st = OP()(ch[0] ? ch[0]->st : E()(), OP()(t, ch[1] ? ch[1]->st : E()()));
-  }
+  void push_up() { st = OP()(ch[0] ? ch[0]->st : E()(), OP()(t, ch[1] ? ch[1]->st : E()())); }
   void reverse() {
     reversed ^= 1;
     st = REV()(st);
@@ -132,11 +126,7 @@ int main() {
     swap(get<1>(t), get<2>(t));
     return t;
   });
-  using OP = decltype([](T t0, T t1) {
-    return T(get<0>(t0) * get<0>(t1) % mod,
-             (get<1>(t0) * get<0>(t1) + get<1>(t1)) % mod,
-             (get<2>(t1) * get<0>(t0) + get<2>(t0)) % mod);
-  });
+  using OP = decltype([](T t0, T t1) { return T(get<0>(t0) * get<0>(t1) % mod, (get<1>(t0) * get<0>(t1) + get<1>(t1)) % mod, (get<2>(t1) * get<0>(t0) + get<2>(t0)) % mod); });
   vector<Node<T, E, REV, OP>> nodes(n);
   for (int i = 0, a, b; i < n; i += 1) {
     cin >> a >> b;

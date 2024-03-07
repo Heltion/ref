@@ -4,8 +4,7 @@ minimum_perfect_matching_on_bipartite_graph(const vector<vector<i64>>& w) {
   vector<i64> pi(n);
   auto resid = [&](int r, int c) { return w[r][c] - pi[c]; };
   for (int c = 0; c < n; c += 1) {
-    int r =
-        ranges::min(views::iota(0, n), {}, [&](int r) { return w[r][c]; });
+    int r = ranges::min(views::iota(0, n), {}, [&](int r) { return w[r][c]; });
     pi[c] = w[r][c];
     if (rm[r] == -1) {
       rm[r] = c;

@@ -12,8 +12,7 @@ struct NimProduct {
           mem[i][j] = u64(1) << (i | j);
         } else {
           int x = k & -k;
-          mem[i][j] = mem[i ^ x][j] ^
-                      mem[(i ^ x) | (x - 1)][(j ^ x) | (i & (x - 1))];
+          mem[i][j] = mem[i ^ x][j] ^ mem[(i ^ x) | (x - 1)][(j ^ x) | (i & (x - 1))];
         }
       }
     }

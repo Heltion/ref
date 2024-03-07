@@ -9,8 +9,7 @@ struct HighestLabelPreflowPush {
   int n;
   vector<vector<int>> g;
   vector<Edge> edges;
-  HighestLabelPreflowPush(int n)
-      : n(n), g(n) {}
+  HighestLabelPreflowPush(int n) : n(n), g(n) {}
   int add(int u, int v, i64 f) {
     if (u == v) {
       return -1;

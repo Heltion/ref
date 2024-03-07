@@ -1,12 +1,10 @@
 struct Node {
   int link, len;
   array<int, sigma> next;
-  Node()
-      : link(-1), len(0) { next.fill(-1); }
+  Node() : link(-1), len(0) { next.fill(-1); }
 };
 struct SuffixAutomaton : vector<Node> {
-  SuffixAutomaton()
-      : vector<Node>(1) {}
+  SuffixAutomaton() : vector<Node>(1) {}
   int extend(int p, int c) {
     if (~at(p).next[c]) {
       // For online multiple strings.

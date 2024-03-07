@@ -9,10 +9,7 @@ struct Simplex {
   vector<vector<f64>> a;
   vector<f64> b, c;
   vector<int> base;
-  Simplex(int n, int m)
-      : n(n), m(m), a(m, vector<f64>(n)), b(m), c(n), base(n + m), z(0) {
-    iota(base.begin(), base.end(), 0);
-  }
+  Simplex(int n, int m) : n(n), m(m), a(m, vector<f64>(n)), b(m), c(n), base(n + m), z(0) { iota(base.begin(), base.end(), 0); }
   void pivot(int out, int in) {
     swap(base[out + n], base[in]);
     f64 f = 1 / a[out][in];

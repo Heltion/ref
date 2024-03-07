@@ -1,5 +1,4 @@
-vector<vector<int>> strongly_connected_components(
-    const vector<vector<int>>& g) {
+vector<vector<int>> strongly_connected_components(const vector<vector<int>>& g) {
   int n = g.size();
   vector<bool> done(n);
   vector<int> pos(n, -1), stack;

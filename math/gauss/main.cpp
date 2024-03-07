@@ -13,9 +13,7 @@ struct Gauss {
   bool operator!=(i64 r) { return y or x != r; }
   Gauss operator~() { return {x, -y}; }
   Gauss operator-(Gauss rhs) { return {x - rhs.x, y - rhs.y}; }
-  Gauss operator*(Gauss rhs) {
-    return {x * rhs.x - y * rhs.y, x * rhs.y + y * rhs.x};
-  }
+  Gauss operator*(Gauss rhs) { return {x * rhs.x - y * rhs.y, x * rhs.y + y * rhs.x}; }
   Gauss operator/(Gauss rhs) {
     auto [x, y] = operator*(~rhs);
     return {div_round(x, rhs.norm()), div_round(y, rhs.norm())};

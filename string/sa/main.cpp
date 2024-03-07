@@ -26,10 +26,7 @@ pair<vector<int>, vector<int>> binary_lifting(const string& s) {
     previous.resize(2 * n, -1);
     k = 0;
     for (int i = 0; i < n; i += 1) {
-      rank[p[i]] = i and previous[p[i]] == previous[p[i - 1]] and
-                           previous[p[i] + m] == previous[p[i - 1] + m]
-                       ? rank[p[i - 1]]
-                       : k++;
+      rank[p[i]] = i and previous[p[i]] == previous[p[i - 1]] and previous[p[i] + m] == previous[p[i - 1] + m] ? rank[p[i - 1]] : k++;
     }
   }
   vector<int> lcp(n);
