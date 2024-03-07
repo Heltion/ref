@@ -6,7 +6,7 @@ using namespace __gnu_pbds;
 #else
 #define debug(...) void(0)
 #endif
-template <typename T>
+template <class T>
 using RBTree = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 using i64 = int64_t;
 int main() {

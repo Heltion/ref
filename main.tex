@@ -16,14 +16,14 @@
 \fancyhead[R]{\thepage}
 \fancyfoot{}
 \lstset{
-    morekeywords = {u64, i64, f64},
     keywordstyle = \bf,
     language     = C++,
-    basicstyle   = \tt\footnotesize,
+    basicstyle   = \ttfamily\footnotesize,
     frame        = single,
     numbers      = left,
     numberstyle   = \scriptsize,
-    breaklines   = true
+    breaklines   = true,
+    morekeywords = {u64, i64, f64, requires},
 }
 \pagestyle{plain}
 \setlength\columnsep{0.8cm}
@@ -40,13 +40,41 @@
     \footnotesize
 
     \section{Contest}
+
     \subsection{Makefile}
     \lstinputlisting{misc/Makefile}
+
     \subsection{debug.h}
     \lstinputlisting{misc/debug.h}
-    \subsection{Template}
+
+    \subsection{template.cpp}
     \lstinputlisting{misc/template.cpp}
-    \subsection{Clang-foramt}
+
+    \subsection{.clang-foramt}
+    \lstinputlisting{misc/.clang-format}
+
+    \section{Data Structure}
+
+    \subsection{Segment Tree}
+    \lstinputlisting{datastructure/segment_tree/main.hpp}
+
+    \subsection{Sparse Table}
+    \lstinputlisting{datastructure/st/main.cpp}
+
+    \subsection{Treap}
+    \lstinputlisting{datastructure/treap/main.cpp}
+    \subsection{Lines Maximum}
+    \lstinputlisting{datastructure/lines/main.cpp}
+    \subsection{Segments Maximum}
+    \lstinputlisting{datastructure/segments/main.cpp}
+    \subsection{Segment Beats}
+    \lstinputlisting{datastructure/beat/main.cpp}
+    \subsection{Tree}
+    \subsubsection{Least Common Ancestor}
+    \lstinputlisting{datastructure/tree/lca/main.cpp}
+    \subsubsection{Link Cut Tree}
+    \lstinputlisting{datastructure/lct/main.cpp}
+
 
     \section{Graph}
     \subsection{Connected Components}
@@ -90,25 +118,6 @@
     \subsection{Minimum Cost Maximum Flow}
     Constraints: there is no edge with negative cost.
     \lstinputlisting{graph/mcmf/main.cpp}
-
-    \section{Data Structure}
-    \subsection{Disjoint Set Union}
-    \lstinputlisting{datastructure/dsu/main.cpp}
-    \subsection{Sparse Table}
-    \lstinputlisting{datastructure/st/main.cpp}
-    \subsection{Treap}
-    \lstinputlisting{datastructure/treap/main.cpp}
-    \subsection{Lines Maximum}
-    \lstinputlisting{datastructure/lines/main.cpp}
-    \subsection{Segments Maximum}
-    \lstinputlisting{datastructure/segments/main.cpp}
-    \subsection{Segment Beats}
-    \lstinputlisting{datastructure/beat/main.cpp}
-    \subsection{Tree}
-    \subsubsection{Least Common Ancestor}
-    \lstinputlisting{datastructure/tree/lca/main.cpp}
-    \subsubsection{Link Cut Tree}
-    \lstinputlisting{datastructure/lct/main.cpp}
 
 
     \section{String}
