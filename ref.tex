@@ -1,0 +1,55 @@
+\documentclass[9pt]{article}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{listings}
+\renewcommand{\include}[1]{
+    \pdfmdfivesum file {#1}
+    \lstinputlisting{#1}
+}
+
+\usepackage[a4paper, landscape]{geometry}
+\geometry{
+    left   = 40pt,
+    right  = 40pt,
+    top    = 40pt,
+    bottom = 40pt
+}
+\usepackage{fancyhdr}
+\pagestyle{plain}
+\setcounter{page}{0}
+
+\usepackage{multicol}
+\setlength{\columnsep}{40pt}
+\setlength{\columnseprule}{0.5pt}
+\setcounter{tocdepth}{1}
+
+
+\title{Team Reference Document}
+\author{Heltion}
+
+\lstset{
+    language    = C++,
+    basicstyle  = \tt\footnotesize,
+    numbers     = left,
+    numberstyle = \footnotesize,
+    frame       = t,
+    aboveskip   = 0pt,
+    belowskip   = 0pt,
+    breaklines
+}
+
+\begin{document}
+\maketitle
+\newpage
+\setcounter{page}{1}
+\begin{multicols}{2}
+    \tableofcontents
+    \input{contest/main.tex}
+    \input{data_structure/main.tex}
+    \input{graph/main.tex}
+    \input{string/main.tex}
+    \input{math/main.tex}
+    \input{game/main.tex}
+    \input{geometry/main.tex}
+\end{multicols}
+\end{document}

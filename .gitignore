@@ -1,0 +1,6 @@
+.vscode
+*.log
+*.aux
+ref.*
+!ref.tex
+!ref.pdf
